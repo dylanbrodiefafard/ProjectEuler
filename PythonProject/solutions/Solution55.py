@@ -1,5 +1,5 @@
 from solutions.BaseSolution import BaseSolution
-from util.integers import is_paldindrome
+from util.integers import is_palindrome
 
 
 class P55(BaseSolution):
@@ -14,7 +14,7 @@ class P55(BaseSolution):
         n = n + int(str(n)[::-1])
         steps = 1
         while steps <= 50:
-            if is_paldindrome(n):
+            if is_palindrome(n):
                 return False
             n = n + int(str(n)[::-1])
             steps += 1

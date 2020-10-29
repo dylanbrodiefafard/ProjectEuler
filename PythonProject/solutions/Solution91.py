@@ -1,5 +1,5 @@
 from itertools import combinations
-from math import isclose, sqrt, ceil, gcd
+from math import isclose, ceil, gcd
 
 from solutions.BaseSolution import BaseSolution
 
@@ -91,7 +91,7 @@ class P91(BaseSolution):
         draw = ImageDraw.Draw(img)
 
         points = [(x, y) for x in range(n + 1) for y in range(n + 1)]
-        num_along_width = num_along_height = int(ceil(sqrt(num_triangles)))
+        num_along_width = num_along_height = int(ceil(num_triangles ** .5))
         padding = 20
         size = min(
             int((((w - padding) / num_along_width) - padding)),

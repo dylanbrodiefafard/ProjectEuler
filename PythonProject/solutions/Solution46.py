@@ -1,5 +1,3 @@
-from math import sqrt
-
 from solutions.BaseSolution import BaseSolution
 from util.primes import primes, is_prime
 
@@ -37,7 +35,7 @@ class P46(BaseSolution):
 
     def get_coefficients(self, n):
         for a in self.primes_generator(n - 2):
-            for b in range(1, int(sqrt(n)) + 1):
+            for b in range(1, int(n ** .5) + 1):
                 if a + 2 * (b ** 2) == n:
                     return a, b
 

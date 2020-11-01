@@ -1,7 +1,7 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class Solution43(BaseSolution):
+class Solution43(SolutionBase):
     NUMBER = 43
     VERIFIED_ANSWER = 16695334890
     DIVISORS = [2, 3, 5, 7, 11, 13, 17]

@@ -1,10 +1,10 @@
 from collections import defaultdict
 from math import sqrt, ceil
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class P39(BaseSolution):
+class P39(SolutionBase):
     NUMBER = 39
     VERIFIED_ANSWER = 840
 

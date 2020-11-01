@@ -1,10 +1,10 @@
 from itertools import permutations
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.primes import is_prime
 
 
-class Solution41(BaseSolution):
+class Solution41(SolutionBase):
     NUMBER = 41
     VERIFIED_ANSWER = 7652413
 

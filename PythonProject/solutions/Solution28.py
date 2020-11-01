@@ -1,10 +1,10 @@
 from itertools import islice
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.sequences import spiral_diagonal
 
 
-class Solution28(BaseSolution):
+class Solution28(SolutionBase):
     NUMBER = 28
     VERIFIED_ANSWER = 669171001
 

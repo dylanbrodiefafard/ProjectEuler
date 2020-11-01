@@ -1,6 +1,6 @@
 from collections import Counter
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
 class HandRank:
@@ -80,7 +80,7 @@ class FiveCardPokerHand(object):
         return self.rank_order < other.rank_order
 
 
-class P54(BaseSolution):
+class P54(SolutionBase):
     NUMBER = 54
     VERIFIED_ANSWER = 379
 

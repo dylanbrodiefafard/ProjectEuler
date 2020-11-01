@@ -1,10 +1,10 @@
 from collections import defaultdict
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.primes import primes, is_prime
 
 
-class P51(BaseSolution):
+class P51(SolutionBase):
     NUMBER = 51
     VERIFIED_ANSWER = 121313
     VALID_PRIME_ENDING_DIGITS = [1, 2, 3, 5, 7, 9]

@@ -1,7 +1,7 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class Solution19(BaseSolution):
+class Solution19(SolutionBase):
     NUMBER = 19
     VERIFIED_ANSWER = 171
     MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

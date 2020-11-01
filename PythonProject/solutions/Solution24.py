@@ -1,9 +1,9 @@
 from itertools import islice, permutations
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class Solution24(BaseSolution):
+class Solution24(SolutionBase):
     NUMBER = 24
     VERIFIED_ANSWER = 2783915460
 

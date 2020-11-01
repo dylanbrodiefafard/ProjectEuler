@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.primes import primes, is_prime
 
 
-class P46(BaseSolution):
+class P46(SolutionBase):
     NUMBER = 46
     VERIFIED_ANSWER = 5777
 

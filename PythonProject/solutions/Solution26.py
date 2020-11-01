@@ -1,11 +1,11 @@
 from collections import namedtuple
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import multiplicative_order
 from util.primes import primes
 
 
-class Solution26(BaseSolution):
+class Solution26(SolutionBase):
     NUMBER = 26
     VERIFIED_ANSWER = 983
 

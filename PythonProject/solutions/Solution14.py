@@ -1,9 +1,9 @@
 from collections import namedtuple
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class Solution14(BaseSolution):
+class Solution14(SolutionBase):
     NUMBER = 14
     VERIFIED_ANSWER = 837799
 

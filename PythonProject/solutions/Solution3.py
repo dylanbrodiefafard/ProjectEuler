@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import prime_factors
 
 
-class Solution3(BaseSolution):
+class Solution3(SolutionBase):
     NUMBER = 3
     VERIFIED_ANSWER = 6857
 

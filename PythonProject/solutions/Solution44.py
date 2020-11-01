@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.sequences import pentagonal
 
 
-class P44(BaseSolution):
+class P44(SolutionBase):
     NUMBER = 44
     VERIFIED_ANSWER = 5482660
 

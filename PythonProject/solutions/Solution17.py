@@ -1,7 +1,7 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class Solution17(BaseSolution):
+class Solution17(SolutionBase):
     NUMBER = 17
     VERIFIED_ANSWER = 21124
     NUM_LETTERS_BY_NUMBER = {

@@ -1,11 +1,11 @@
 from collections import namedtuple
 from itertools import takewhile
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.primes import primes, is_prime
 
 
-class Solution27(BaseSolution):
+class Solution27(SolutionBase):
     NUMBER = 27
     VERIFIED_ANSWER = -59231
 

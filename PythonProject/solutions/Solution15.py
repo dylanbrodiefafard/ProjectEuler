@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import factorial
 
 
-class Solution15(BaseSolution):
+class Solution15(SolutionBase):
     NUMBER = 15
     VERIFIED_ANSWER = 137846528820
 

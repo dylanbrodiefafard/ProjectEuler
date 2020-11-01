@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import digital_sum
 
 
-class Solution16(BaseSolution):
+class Solution16(SolutionBase):
     NUMBER = 16
     VERIFIED_ANSWER = 1366
 

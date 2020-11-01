@@ -1,9 +1,9 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import num_divisors
 from util.sequences import triangular
 
 
-class Solution12(BaseSolution):
+class Solution12(SolutionBase):
     NUMBER = 12
     VERIFIED_ANSWER = 76576500
 

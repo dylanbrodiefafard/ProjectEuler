@@ -1,10 +1,10 @@
 from itertools import islice
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.primes import primes
 
 
-class Solution7(BaseSolution):
+class Solution7(SolutionBase):
     NUMBER = 7
     VERIFIED_ANSWER = 104743
 

@@ -1,7 +1,7 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class P52(BaseSolution):
+class P52(SolutionBase):
     NUMBER = 52
     VERIFIED_ANSWER = 142857
 

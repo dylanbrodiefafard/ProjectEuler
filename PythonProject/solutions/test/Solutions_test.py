@@ -1,6 +1,6 @@
 import unittest
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
 def make_solution_f(s: type):
@@ -23,7 +23,7 @@ def make_verified_answer_f(s: type):
 SOLUTION_TESTS = {}
 VERIFIED_ANSWER_TESTS = {}
 
-for s_class in BaseSolution.get_solution_classes():
+for s_class in SolutionBase.get_solution_classes():
     solution_f_name = 'test_solution{}'.format(s_class.NUMBER)
     SOLUTION_TESTS[solution_f_name] = make_solution_f(s_class)
     SOLUTION_TESTS[solution_f_name].__name__ = solution_f_name
@@ -33,7 +33,7 @@ for s_class in BaseSolution.get_solution_classes():
     VERIFIED_ANSWER_TESTS[verified_answer_f_name].__name__ = verified_answer_f_name
 
 
-class SolutionsMeta(type):
+class TestsMeta(type):
     TESTS = {}
 
     def __init__(cls, *args, **kwargs):
@@ -42,11 +42,11 @@ class SolutionsMeta(type):
         super().__init__(*args, **kwargs)
 
 
-class SolutionsVerifiedAnswersTest(unittest.TestCase, metaclass=SolutionsMeta):
+class SolutionsVerifiedAnswersTest(unittest.TestCase, metaclass=TestsMeta):
     TESTS = VERIFIED_ANSWER_TESTS
 
 
-class SolutionsTest(unittest.TestCase, metaclass=SolutionsMeta):
+class SolutionsTest(unittest.TestCase, metaclass=TestsMeta):
     TESTS = SOLUTION_TESTS
 
 

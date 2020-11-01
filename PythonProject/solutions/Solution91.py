@@ -1,10 +1,10 @@
 from itertools import combinations
 from math import isclose, ceil, gcd
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 
 
-class P91(BaseSolution):
+class P91(SolutionBase):
     NUMBER = 91
     VERIFIED_ANSWER = 14234
 

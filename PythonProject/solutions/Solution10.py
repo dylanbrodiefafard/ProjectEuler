@@ -1,10 +1,10 @@
 from itertools import takewhile
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.primes import primes
 
 
-class Solution10(BaseSolution):
+class Solution10(SolutionBase):
     NUMBER = 10
     VERIFIED_ANSWER = 142913828922
 

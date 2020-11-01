@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import pythagorean_triples
 
 
-class Solution9(BaseSolution):
+class Solution9(SolutionBase):
     NUMBER = 9
     VERIFIED_ANSWER = 31875000
 

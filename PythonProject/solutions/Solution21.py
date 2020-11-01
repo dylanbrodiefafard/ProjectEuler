@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import proper_factors
 
 
-class Solution21(BaseSolution):
+class Solution21(SolutionBase):
     NUMBER = 21
     VERIFIED_ANSWER = 31626
 

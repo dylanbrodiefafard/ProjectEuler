@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.functools import prod
 
 
-class Solution11(BaseSolution):
+class Solution11(SolutionBase):
     NUMBER = 11
     VERIFIED_ANSWER = 70600674
 

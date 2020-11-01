@@ -1,11 +1,11 @@
 from itertools import chain
 
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import append_digits, prepend_digits
 from util.primes import is_prime
 
 
-class Solution37(BaseSolution):
+class Solution37(SolutionBase):
     NUMBER = 37
     VERIFIED_ANSWER = 748317
     SINGLE_DIGIT_PRIMES = [2, 3, 5, 7]

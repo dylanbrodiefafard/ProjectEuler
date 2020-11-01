@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import digital_sum, factorial
 
 
-class Solution20(BaseSolution):
+class Solution20(SolutionBase):
     NUMBER = 20
     VERIFIED_ANSWER = 648
 

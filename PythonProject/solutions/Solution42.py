@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.sequences import triangular
 
 
-class Solution42(BaseSolution):
+class Solution42(SolutionBase):
     NUMBER = 42
     VERIFIED_ANSWER = 162
     LETTERS_TO_NUMBERS = letters = {

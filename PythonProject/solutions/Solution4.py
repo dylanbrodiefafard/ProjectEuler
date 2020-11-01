@@ -1,8 +1,8 @@
-from solutions.BaseSolution import BaseSolution
+from solutions.SolutionBase import SolutionBase
 from util.integers import is_palindrome
 
 
-class Solution4(BaseSolution):
+class Solution4(SolutionBase):
     NUMBER = 4
     VERIFIED_ANSWER = 906609
 

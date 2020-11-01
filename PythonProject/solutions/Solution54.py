@@ -80,7 +80,7 @@ class FiveCardPokerHand(object):
         return self.rank_order < other.rank_order
 
 
-class P54(SolutionBase):
+class Solution54(SolutionBase):
     NUMBER = 54
     VERIFIED_ANSWER = 379
 
@@ -105,4 +105,4 @@ class P54(SolutionBase):
 
 
 if __name__ == '__main__':
-    P54().print_answer()
+    Solution54().print_answer()

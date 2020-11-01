@@ -2,7 +2,7 @@ from solutions.SolutionBase import SolutionBase
 from util.sequences import pentagonal, hexagonal, triangular
 
 
-class P45(SolutionBase):
+class Solution45(SolutionBase):
     NUMBER = 45
     VERIFIED_ANSWER = 1533776805
 
@@ -32,4 +32,4 @@ class P45(SolutionBase):
 
 
 if __name__ == '__main__':
-    P45().print_answer()
+    Solution45().print_answer()

@@ -1,8 +1,7 @@
 from collections import namedtuple
-from itertools import takewhile
 
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes, is_prime
+from util.primes import is_prime, primes_up_to
 
 
 class Solution27(SolutionBase):
@@ -25,7 +24,7 @@ class Solution27(SolutionBase):
     def coefficients_for_quadratic_with_max_consecutive_primes(max_b: int):
         assert max_b != 0
         Answer = namedtuple('Answer', ['num_consecutive_primes', 'coefficients'])
-        prime_list = list(takewhile(lambda p: p <= max_b, primes()))
+        prime_list = list(primes_up_to(max_b))
         answer = Answer(-1, (None, None))
         for a in range(-max_b, max_b + 1):
             for b in prime_list:

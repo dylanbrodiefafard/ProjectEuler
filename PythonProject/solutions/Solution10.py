@@ -1,7 +1,5 @@
-from itertools import takewhile
-
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes
+from util.primes import primes_up_to
 
 
 class Solution10(SolutionBase):
@@ -13,7 +11,7 @@ class Solution10(SolutionBase):
 
     @staticmethod
     def sum_of_primes_below(n):
-        return sum(takewhile(lambda p: p < n, primes()))
+        return sum(primes_up_to(n - 1))
 
     def get_answer(self):
         return self.sum_of_primes_below(2000000)

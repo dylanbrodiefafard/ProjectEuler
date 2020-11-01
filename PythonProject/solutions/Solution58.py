@@ -3,7 +3,7 @@ from util.primes import is_prime
 from util.sequences import spiral_diagonal
 
 
-class P58(SolutionBase):
+class Solution58(SolutionBase):
     NUMBER = 58
     VERIFIED_ANSWER = 26241
 
@@ -27,4 +27,4 @@ class P58(SolutionBase):
 
 
 if __name__ == '__main__':
-    P58().print_answer()
+    Solution58().print_answer()

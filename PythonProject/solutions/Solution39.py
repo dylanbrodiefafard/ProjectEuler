@@ -4,7 +4,7 @@ from math import sqrt, ceil
 from solutions.SolutionBase import SolutionBase
 
 
-class P39(SolutionBase):
+class Solution39(SolutionBase):
     NUMBER = 39
     VERIFIED_ANSWER = 840
 
@@ -36,4 +36,4 @@ class P39(SolutionBase):
 
 
 if __name__ == '__main__':
-    P39().print_answer()
+    Solution39().print_answer()

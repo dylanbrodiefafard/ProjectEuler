@@ -2,7 +2,7 @@ from solutions.SolutionBase import SolutionBase
 from util.integers import digital_sum
 
 
-class P56(SolutionBase):
+class Solution56(SolutionBase):
     NUMBER = 56
     VERIFIED_ANSWER = 972
 
@@ -18,4 +18,4 @@ class P56(SolutionBase):
 
 
 if __name__ == '__main__':
-    P56().print_answer()
+    Solution56().print_answer()

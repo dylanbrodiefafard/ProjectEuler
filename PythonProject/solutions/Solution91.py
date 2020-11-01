@@ -4,7 +4,7 @@ from math import isclose, ceil, gcd
 from solutions.SolutionBase import SolutionBase
 
 
-class P91(SolutionBase):
+class Solution91(SolutionBase):
     NUMBER = 91
     VERIFIED_ANSWER = 14234
 
@@ -146,4 +146,4 @@ class P91(SolutionBase):
 
 
 if __name__ == '__main__':
-    P91().print_answer()
+    Solution91().print_answer()

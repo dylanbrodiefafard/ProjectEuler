@@ -2,7 +2,7 @@ from collections import namedtuple
 
 from solutions.SolutionBase import SolutionBase
 from util.integers import multiplicative_order
-from util.primes import primes
+from util.primes import primes_up_to
 
 
 class Solution26(SolutionBase):
@@ -24,12 +24,10 @@ class Solution26(SolutionBase):
     def denominator_with_longest_repetend(max_denominator):
         Answer = namedtuple('Answer', ['denominator', 'repetend_length'])
         answer = Answer(None, 0)
-        for p in primes():
+        for p in primes_up_to(max_denominator):
             if p == 2 or p == 5:
                 # coprime to 10
                 continue
-            if p > max_denominator:
-                break
             repetend_length = multiplicative_order(10, p)
             if repetend_length > answer.repetend_length:
                 answer = Answer(p, repetend_length)

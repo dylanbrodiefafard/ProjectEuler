@@ -1,7 +1,7 @@
 from solutions.SolutionBase import SolutionBase
 
 
-class P57(SolutionBase):
+class Solution57(SolutionBase):
     NUMBER = 57
     VERIFIED_ANSWER = 153
 
@@ -36,4 +36,4 @@ class P57(SolutionBase):
 
 
 if __name__ == '__main__':
-    P57().print_answer()
+    Solution57().print_answer()

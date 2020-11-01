@@ -2,7 +2,7 @@ from solutions.SolutionBase import SolutionBase
 from util.integers import is_palindrome
 
 
-class P55(SolutionBase):
+class Solution55(SolutionBase):
     NUMBER = 55
     VERIFIED_ANSWER = 249
 
@@ -29,4 +29,4 @@ class P55(SolutionBase):
 
 
 if __name__ == '__main__':
-    P55().print_answer()
+    Solution55().print_answer()

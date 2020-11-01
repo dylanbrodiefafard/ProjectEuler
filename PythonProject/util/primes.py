@@ -41,6 +41,17 @@ def primes():
         q += 1
 
 
+def primes_up_to(n: int):
+    yield 2
+    assumed_primes = set(range(3, n + 1, 2))
+    for maybe_prime in range(3, n + 1, 2):
+        if maybe_prime not in assumed_primes:
+            continue
+        yield maybe_prime
+        for multiple in range(maybe_prime ** 2, n + 1, 2 * maybe_prime):
+            assumed_primes.discard(multiple)
+
+
 _known_primes = {p: None for p in takewhile(lambda p: p < 1000, primes())}
 _bases_by_limit = {
     2047: (2, ),

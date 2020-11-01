@@ -4,7 +4,7 @@ from solutions.SolutionBase import SolutionBase
 from util.primes import primes, is_prime
 
 
-class P51(SolutionBase):
+class Solution51(SolutionBase):
     NUMBER = 51
     VERIFIED_ANSWER = 121313
     VALID_PRIME_ENDING_DIGITS = [1, 2, 3, 5, 7, 9]
@@ -68,4 +68,4 @@ class P51(SolutionBase):
 
 
 if __name__ == '__main__':
-    P51().print_answer()
+    Solution51().print_answer()

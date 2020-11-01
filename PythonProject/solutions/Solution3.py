@@ -11,7 +11,7 @@ class Solution3(BaseSolution):
 
     @staticmethod
     def get_largest_prime_factor(n):
-        return max(prime_factors(n))
+        return max((factor for factor, _ in prime_factors(n)))
 
     def get_answer(self):
         return self.get_largest_prime_factor(600851475143)

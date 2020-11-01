@@ -1,5 +1,3 @@
-from collections import Counter
-
 from solutions.BaseSolution import BaseSolution
 from util.functools import prod
 from util.integers import prime_factors
@@ -21,9 +19,9 @@ class Solution5(BaseSolution):
             return 2
         max_power_of_prime_factors = {}
         for n in range(2, max_val + 1):
-            for factor, count in Counter(prime_factors(n)).items():
-                max_power_of_prime_factors[factor] = max(max_power_of_prime_factors.get(factor, 0), count)
-        return prod((factor ** power for factor, power in max_power_of_prime_factors.items()))
+            for factor, exponent in prime_factors(n):
+                max_power_of_prime_factors[factor] = max(max_power_of_prime_factors.get(factor, 0), exponent)
+        return prod((factor ** exponent for factor, exponent in max_power_of_prime_factors.items()))
 
     def get_answer(self):
         return self.smallest_number_evenly_divisible_by_all(20)

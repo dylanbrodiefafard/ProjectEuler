@@ -56,11 +56,19 @@ class IntegersTest(TestCase):
     def test_prime_factors(self):
         self.assertListEqual([], list(prime_factors(0)))
         self.assertListEqual([], list(prime_factors(1)))
-        self.assertListEqual([2], list(prime_factors(2)))
-        self.assertListEqual([3], list(prime_factors(3)))
-        self.assertListEqual([2, 2, 3], list(prime_factors(12)))
-        self.assertListEqual([3, 7, 7], list(prime_factors(147)))
-        self.assertListEqual([2, 3, 5, 11], list(prime_factors(330)))
+        self.assertListEqual([(2, 1)], list(prime_factors(2)))
+        self.assertListEqual([(3, 1)], list(prime_factors(3)))
+        self.assertListEqual([(2, 2), (3, 1)], list(prime_factors(12)))
+        self.assertListEqual([(3, 1), (7, 2)], list(prime_factors(147)))
+        self.assertListEqual([(2, 1), (3, 1), (5, 1), (11, 1)], list(prime_factors(330)))
+
+    def test_proper_factors(self):
+        self.assertListEqual([], list(proper_factors(1)))
+        self.assertListEqual([1], list(proper_factors(2)))
+        self.assertListEqual([1], list(proper_factors(3)))
+        self.assertListEqual([1, 2, 3, 4, 6], list(proper_factors(12)))
+        self.assertListEqual([1, 3, 7, 21, 49], list(proper_factors(147)))
+        self.assertListEqual([1, 2, 3, 5, 6, 10, 11, 15, 22, 30, 33, 55, 66, 110, 165], list(proper_factors(330)))
 
     def test_num_divisors(self):
         self.assertEqual(0, num_divisors(0))
@@ -79,3 +87,11 @@ class IntegersTest(TestCase):
         self.assertEqual(6, factorial(3))
         self.assertEqual(1307674368000, factorial(15))
         self.assertEqual(2432902008176640000, factorial(20))
+
+    def test_multiplicative_order(self):
+        self.assertEqual(1, multiplicative_order(1, 2))
+        self.assertEqual(3, multiplicative_order(4, 9))
+        self.assertEqual(6, multiplicative_order(14, 9))
+        self.assertEqual(6, multiplicative_order(140, 9))
+        self.assertEqual(3, multiplicative_order(1024, 9))
+        self.assertEqual(1, multiplicative_order(666, 19))

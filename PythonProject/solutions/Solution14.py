@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from solutions.BaseSolution import BaseSolution
 
 
@@ -27,15 +29,14 @@ class Solution14(BaseSolution):
         return chain_length
 
     def get_answer(self):
+        Answer = namedtuple('Answer', ['n', 'chain_length'])
+        answer = Answer(None, 0)
         self._chain_lengths.clear()
-        max_chain_length = 0
-        max_chain_length_n = None
         for n in range(1, 1000000):
             chain_length = self.get_chain_length(n)
-            if chain_length > max_chain_length:
-                max_chain_length = chain_length
-                max_chain_length_n = n
-        return max_chain_length_n
+            if chain_length > answer.chain_length:
+                answer = Answer(n, chain_length)
+        return answer.n
 
 
 if __name__ == '__main__':

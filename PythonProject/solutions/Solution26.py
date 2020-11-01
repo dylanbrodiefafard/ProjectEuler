@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from solutions.BaseSolution import BaseSolution
 from util.integers import multiplicative_order
 from util.primes import primes
@@ -20,8 +22,8 @@ class Solution26(BaseSolution):
 
     @staticmethod
     def denominator_with_longest_repetend(max_denominator):
-        denominator = None  # (length of recurring cycle, denominator)
-        max_repetend_length = 0
+        Answer = namedtuple('Answer', ['denominator', 'repetend_length'])
+        answer = Answer(None, 0)
         for p in primes():
             if p == 2 or p == 5:
                 # coprime to 10
@@ -29,10 +31,9 @@ class Solution26(BaseSolution):
             if p > max_denominator:
                 break
             repetend_length = multiplicative_order(10, p)
-            if repetend_length > max_repetend_length:
-                max_repetend_length = repetend_length
-                denominator = p
-        return denominator
+            if repetend_length > answer.repetend_length:
+                answer = Answer(p, repetend_length)
+        return answer.denominator
 
     def get_answer(self):
         """

@@ -17,3 +17,16 @@ def hexagonal():
     while True:
         yield n * (2 * n - 1)
         n += 1
+
+def spiral_diagonal():
+    value = 3
+    n = 1
+    side_length = 3
+    while True:
+        yield value
+        if n == 4:
+            side_length += 2
+            n = 1
+        else:
+            n += 1
+        value += (side_length - 1)

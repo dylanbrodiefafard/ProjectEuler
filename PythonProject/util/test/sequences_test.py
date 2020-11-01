@@ -22,3 +22,17 @@ class SequencesTest(TestCase):
         self.assertListEqual([0, 1, 6, 15, 28], list(islice(hexagonal_gen, 5)))
         list(islice(hexagonal_gen, 20))
         self.assertListEqual([1225, 1326, 1431, 1540, 1653], list(islice(hexagonal_gen, 5)))
+
+    def test_spiral_diagonal(self):
+        self.assertListEqual(
+            [3, 5, 7, 9],
+            list(islice(spiral_diagonal(), 4))
+        )
+        self.assertListEqual(
+            [3, 5, 7, 9, 13, 17, 21, 25],
+            list(islice(spiral_diagonal(), 8))
+        )
+        self.assertListEqual(
+            [3, 5, 7, 9, 13, 17, 21, 25, 31, 37, 43, 49],
+            list(islice(spiral_diagonal(), 12))
+        )

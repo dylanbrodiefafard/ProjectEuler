@@ -1,3 +1,4 @@
+from collections import defaultdict
 from itertools import takewhile
 
 
@@ -13,7 +14,7 @@ def primes():
     indefinitely, but only as long as required by the current
     number being tested.
     """
-    divisors = {}
+    divisors = defaultdict(list)
 
     # The running integer that's checked for primeness
     q = 2
@@ -25,7 +26,7 @@ def primes():
             # already marked in previous iterations
             #
             yield q
-            divisors[q * q] = [q]
+            divisors[q * q].append(q)
         else:
             # q is composite. D[q] is the list of primes that
             # divide it. Since we've reached q, we no longer
@@ -34,7 +35,7 @@ def primes():
             # numbers
             #
             for p in divisors[q]:
-                divisors.setdefault(p + q, []).append(p)
+                divisors[p + q].append(p)
             del divisors[q]
 
         q += 1

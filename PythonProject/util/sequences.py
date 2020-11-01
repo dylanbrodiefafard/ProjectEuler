@@ -18,6 +18,7 @@ def hexagonal():
         yield n * (2 * n - 1)
         n += 1
 
+
 def spiral_diagonal():
     value = 3
     n = 1

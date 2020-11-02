@@ -1,41 +1,38 @@
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes, is_prime
+from util.primes import primes
 
 
 class Solution46(SolutionBase):
     NUMBER = 46
     VERIFIED_ANSWER = 5777
 
-    def __init__(self):
-        self._primes = []
-        self._primes_generator = primes()
-
     def run_tests(self, test_case):
-        test_case.assertTupleEqual((7, 1), self.get_coefficients(9))
-        test_case.assertTupleEqual((7, 2), self.get_coefficients(15))
-        test_case.assertTupleEqual((3, 3), self.get_coefficients(21))
-        test_case.assertTupleEqual((7, 3), self.get_coefficients(25))
-        test_case.assertTupleEqual((19, 2), self.get_coefficients(27))
-        test_case.assertTupleEqual((31, 1), self.get_coefficients(33))
+        test_case.assertTupleEqual((7, 1), self.get_coefficients(9, {2, 3, 5, 7}))
+        test_case.assertTupleEqual((7, 2), self.get_coefficients(15, {2, 3, 5, 7, 11}))
+        test_case.assertTupleEqual((3, 3), self.get_coefficients(21, {2, 3, 5, 7, 11, 13, 17, 19}))
+        test_case.assertTupleEqual((7, 3), self.get_coefficients(25, {2, 3, 5, 7, 11, 13, 17, 19, 23}))
+        test_case.assertTupleEqual((19, 2), self.get_coefficients(27, {2, 3, 5, 7, 11, 13, 17, 19, 23}))
+        test_case.assertTupleEqual((31, 1), self.get_coefficients(33, {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31}))
 
     def get_answer(self):
+        primes_generator = primes()
+        primes_so_far = [next(primes_generator)]
+        get_coefficients = self.get_coefficients
+        max_prime = max(primes_so_far)
         n = 35
         while True:
-            if not is_prime(n) and self.get_coefficients(n) is None:
+            while max_prime < n:
+                primes_so_far.append(max_prime := next(primes_generator))
+            if n != max_prime and get_coefficients(n, primes_so_far) is None:
+                # Odd composite that doesn't fit the equation.
                 return n
             n += 2
 
-    def primes_generator(self, max_prime):
-        yield from self._primes
-        for prime in self._primes_generator:
-            self._primes.append(prime)
-            if prime > max_prime:
-                return
-            yield prime
-
-    def get_coefficients(self, n):
-        for a in self.primes_generator(n - 2):
-            for b in range(1, int(n ** .5) + 1):
+    @staticmethod
+    def get_coefficients(n, candidates):
+        max_b = int(n ** .5) + 1
+        for a in candidates:
+            for b in range(1, max_b):
                 if a + 2 * (b ** 2) == n:
                     return a, b
 

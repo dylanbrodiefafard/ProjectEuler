@@ -1,44 +1,24 @@
-from collections import defaultdict
-from itertools import takewhile
+from itertools import takewhile, compress, islice, count, cycle
 
 
 def primes():
-    """
-    Generate an infinite sequence of prime numbers.
-    Sieve of Eratosthenes
-    Code by David Eppstein, UC Irvine, 28 Feb 2002
-    http://code.activestate.com/recipes/117119/
+    # Source: https://stackoverflow.com/a/3796442
+    yield from [2, 3, 5]
 
-    Maps composites to primes witnessing their compositeness.
-    This is memory efficient, as the sieve is not "run forward"
-    indefinitely, but only as long as required by the current
-    number being tested.
-    """
-    divisors = defaultdict(list)
+    divisors = {9: 3, 25: 5}
+    mask = (1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0)
+    modulos = frozenset((1, 7, 11, 13, 17, 19, 23, 29))
 
-    # The running integer that's checked for primeness
-    q = 2
-
-    while True:
-        if q not in divisors:
-            # q is a new prime.
-            # Yield it and mark its first multiple that isn't
-            # already marked in previous iterations
-            #
+    for q in compress(islice(count(7), 0, None, 2), cycle(mask)):
+        p = divisors.pop(q, None)
+        if p is None:
+            divisors[q * q] = q
             yield q
-            divisors[q * q].append(q)
         else:
-            # q is composite. D[q] is the list of primes that
-            # divide it. Since we've reached q, we no longer
-            # need it in the map, but we'll mark the next
-            # multiples of its witnesses to prepare for larger
-            # numbers
-            #
-            for p in divisors[q]:
-                divisors[p + q].append(p)
-            del divisors[q]
-
-        q += 1
+            x = q + 2 * p
+            while x in divisors or (x % 30) not in modulos:
+                x += 2 * p
+            divisors[x] = p
 
 
 def primes_up_to(n: int):

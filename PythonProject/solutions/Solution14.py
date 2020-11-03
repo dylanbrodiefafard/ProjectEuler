@@ -33,8 +33,7 @@ class Solution14(SolutionBase):
         answer = Answer(None, 0)
         chain_lengths = {13: 10, 40: 9, 20: 8, 10: 7, 5: 6, 16: 5, 8: 4, 4: 3, 2: 2, 1: 1}
         get_chain_length = self.chain_length
-        # skip even numbers because they have shorter chains than odd numbers.
-        for n in range(13, 1000000, 2):
+        for n in range(13, 1000000, 1):
             if n in chain_lengths:
                 continue
             if (chain_length := get_chain_length(n, chain_lengths)) > answer.chain_length:

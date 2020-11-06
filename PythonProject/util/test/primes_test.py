@@ -1,4 +1,3 @@
-from itertools import islice
 from unittest import TestCase
 
 from util.primes import *

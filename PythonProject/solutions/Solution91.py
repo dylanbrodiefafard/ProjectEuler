@@ -2,6 +2,7 @@ from itertools import combinations
 from math import isclose, ceil, gcd
 
 from solutions.SolutionBase import SolutionBase
+from util.more_itertools import exactly_n
 
 
 class Solution91(SolutionBase):
@@ -9,9 +10,9 @@ class Solution91(SolutionBase):
     VERIFIED_ANSWER = 14234
 
     def run_tests(self, test_case):
-        test_case.assertEqual(3, len(list(self.get_right_angle_triangles(1))))
+        test_case.assertTrue(exactly_n(self.get_right_angle_triangles(1), 3))
         test_case.assertEqual(3, self.get_num_right_angle_triangles(1))
-        test_case.assertEqual(14, len(list(self.get_right_angle_triangles(2))))
+        test_case.assertTrue(exactly_n(self.get_right_angle_triangles(2), 14))
         test_case.assertEqual(14, self.get_num_right_angle_triangles(2))
 
     def get_answer(self):

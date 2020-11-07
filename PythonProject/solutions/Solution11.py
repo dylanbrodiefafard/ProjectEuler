@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.functools import prod
+from util.more_functools import prod
 
 
 class Solution11(SolutionBase):

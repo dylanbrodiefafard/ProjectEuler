@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from util.functools import *
+from util.more_functools import *
 
 
-class FunctoolsTest(TestCase):
+class MoreFunctoolsTest(TestCase):
     def test_prod(self):
         self.assertEqual(1, prod([]))
         self.assertEqual(1, prod([1]))

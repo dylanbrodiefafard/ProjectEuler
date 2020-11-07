@@ -1,3 +1,10 @@
+def positive_integers():
+    n = 0
+    while True:
+        yield n
+        n += 1
+
+
 def triangle():
     n = 0
     while True:

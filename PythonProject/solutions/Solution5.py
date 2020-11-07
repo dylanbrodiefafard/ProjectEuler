@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.functools import prod
+from util.more_functools import prod
 from util.integers import prime_factors
 
 

@@ -2,7 +2,7 @@ import itertools
 from functools import reduce
 from math import gcd
 
-from util.functools import prod
+from util.more_functools import prod
 
 
 def prepend_digits(digits: int, number: int):

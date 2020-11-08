@@ -1,6 +1,7 @@
 import itertools
 from functools import reduce
 from math import gcd
+from typing import Iterable
 
 from util.more_functools import prod
 
@@ -69,6 +70,16 @@ def num_divisors(n: int):
     return prod(((exponent + 1) for _, exponent in prime_factors(n)))
 
 
+def aliquot_sum(n: int) -> int:
+    """
+    The aliquot sum s(n) of a positive integer n is the sum of all proper divisors of n
+    (all divisors of n other than n itself).
+    """
+    if 0 < n < 4:
+        return 0
+    return prod((1 + base + sum(base ** i for i in range(2, exponent + 1))) for base, exponent in prime_factors(n)) - n
+
+
 def proper_factors(n: int):
     # numbers less than n which divide evenly into n
     assert n > 0
@@ -108,3 +119,14 @@ def multiplicative_order(a: int, m: int):
         return (_a * _b) / gcd(_a, _b)
 
     return reduce(lcm, (_mult_ord(a, f, e) for f, e in prime_factors(m)))
+
+
+def simplified_continued_fraction(denominators: Iterable[int], base: int, n: int) -> (int, int):
+    if n == 0:
+        return base, 1
+    numerator = 1
+    denominators = list(itertools.islice(denominators, n))
+    denominator = denominators[-1]
+    for d in denominators[-2::-1]:
+        numerator, denominator = denominator, d * denominator + numerator
+    return numerator + base * denominator, denominator

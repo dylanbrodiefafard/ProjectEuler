@@ -1,3 +1,6 @@
+from util.integers import aliquot_sum
+
+
 def positive_integers():
     n = 0
     while True:
@@ -59,3 +62,11 @@ def spiral_diagonal():
         else:
             n += 1
         value += (side_length - 1)
+
+
+def abundant():
+    n = 12
+    while True:
+        if aliquot_sum(n) > n:
+            yield n
+        n += 1

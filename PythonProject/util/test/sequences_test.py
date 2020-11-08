@@ -60,3 +60,9 @@ class SequencesTest(TestCase):
             [3, 5, 7, 9, 13, 17, 21, 25, 31, 37, 43, 49],
             list(islice(spiral_diagonal(), 12))
         )
+
+    def test_abundant(self):
+        abundant_gen = abundant()
+        self.assertListEqual([12, 18, 20, 24, 30], list(islice(abundant_gen, 5)))
+        list(islice(abundant_gen, 20))
+        self.assertListEqual([112, 114, 120, 126, 132], list(islice(abundant_gen, 5)))

@@ -1,3 +1,4 @@
+from itertools import cycle
 from unittest import TestCase
 
 from util.integers import *
@@ -95,3 +96,16 @@ class IntegersTest(TestCase):
         self.assertEqual(6, multiplicative_order(140, 9))
         self.assertEqual(3, multiplicative_order(1024, 9))
         self.assertEqual(1, multiplicative_order(666, 19))
+
+    def test_simplified_continued_fraction(self):
+        # Test with continued fraction for 0.84375: [0;1,5,2,2]
+        self.assertTupleEqual((0, 1), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 0))
+        self.assertTupleEqual((1, 1), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 1))
+        self.assertTupleEqual((5, 6), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 2))
+        self.assertTupleEqual((11, 13), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 3))
+        self.assertTupleEqual((27, 32), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 4))
+        # Test with pi
+        self.assertTupleEqual((3, 1), simplified_continued_fraction(cycle([7, 15, 1]), 3, 0))
+        self.assertTupleEqual((22, 7), simplified_continued_fraction(cycle([7, 15, 1]), 3, 1))
+        self.assertTupleEqual((333, 106), simplified_continued_fraction(cycle([7, 15, 1]), 3, 2))
+        self.assertTupleEqual((355, 113), simplified_continued_fraction(cycle([7, 15, 1]), 3, 3))

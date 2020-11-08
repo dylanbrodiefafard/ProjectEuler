@@ -1,6 +1,7 @@
 from collections import defaultdict
 
 from solutions.SolutionBase import SolutionBase
+from util.integers import NEGATIVE_INFINITY
 
 
 class Solution18(SolutionBase):
@@ -35,13 +36,14 @@ class Solution18(SolutionBase):
 
     @staticmethod
     def maximum_top_to_bottom_total(triangle):
-        max_of_children = defaultdict(int)
-        num_rows = len(triangle)
-        # Propagate the maximum upwards.
-        for rev_i, row in enumerate(reversed(triangle)):
-            i = (num_rows - 1) - rev_i
-            for j, num in enumerate(row):
-                max_of_children[(i, j)] += triangle[i][j] + max(max_of_children[(i + 1, j)], max_of_children[(i + 1, j + 1)])
+        max_of_children = defaultdict(lambda: NEGATIVE_INFINITY)
+        # Propagate the maximum backwards.
+        for row_i, row in reversed(list(enumerate(triangle))):
+            for col_i, val in reversed(list(enumerate(row))):
+                max_value_of_children = max(max_of_children[(row_i + 1, col_i)], max_of_children[(row_i + 1, col_i + 1)])
+                if max_value_of_children is not NEGATIVE_INFINITY:
+                    val += max_value_of_children
+                max_of_children[(row_i, col_i)] = val
         return max_of_children[(0, 0)]
 
     def get_answer(self):

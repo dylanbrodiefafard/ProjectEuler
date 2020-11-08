@@ -1,5 +1,5 @@
 import itertools
-from functools import reduce
+from functools import reduce, total_ordering
 from math import gcd
 from typing import Iterable
 
@@ -130,3 +130,25 @@ def simplified_continued_fraction(denominators: Iterable[int], base: int, n: int
     for d in denominators[-2::-1]:
         numerator, denominator = denominator, d * denominator + numerator
     return numerator + base * denominator, denominator
+
+
+@total_ordering
+class _PositiveInfinity(object):
+    def __eq__(self, other):
+        return other is POSITIVE_INFINITY
+
+    def __lt__(self, other):
+        return False
+
+
+@total_ordering
+class _NegativeInfinity(object):
+    def __eq__(self, other):
+        return other is NEGATIVE_INFINITY
+
+    def __lt__(self, other):
+        return True
+
+
+POSITIVE_INFINITY = _PositiveInfinity()
+NEGATIVE_INFINITY = _NegativeInfinity()

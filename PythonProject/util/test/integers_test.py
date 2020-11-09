@@ -109,3 +109,10 @@ class IntegersTest(TestCase):
         self.assertTupleEqual((22, 7), simplified_continued_fraction(cycle([7, 15, 1]), 3, 1))
         self.assertTupleEqual((333, 106), simplified_continued_fraction(cycle([7, 15, 1]), 3, 2))
         self.assertTupleEqual((355, 113), simplified_continued_fraction(cycle([7, 15, 1]), 3, 3))
+
+    def test_aliquot_sum(self):
+        self.assertEqual(9, aliquot_sum(15))
+        self.assertEqual(15, aliquot_sum(16))
+        self.assertEqual(1, aliquot_sum(17))
+        self.assertEqual(42, aliquot_sum(30))
+        self.assertEqual(106, aliquot_sum(80))

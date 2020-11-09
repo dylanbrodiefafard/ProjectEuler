@@ -77,7 +77,7 @@ def aliquot_sum(n: int) -> int:
     """
     if 0 < n < 4:
         return 0
-    return prod((1 + base + sum(base ** i for i in range(2, exponent + 1))) for base, exponent in prime_factors(n)) - n
+    return prod((base ** (exponent + 1) - 1) // (base - 1) for base, exponent in prime_factors(n)) - n
 
 
 def proper_factors(n: int):

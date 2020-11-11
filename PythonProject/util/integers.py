@@ -1,7 +1,7 @@
 import itertools
 from functools import reduce, total_ordering
 from math import gcd
-from typing import Iterable
+from typing import Iterable, Iterator
 
 from util.more_functools import prod
 
@@ -80,17 +80,25 @@ def aliquot_sum(n: int) -> int:
     return prod((base ** (exponent + 1) - 1) // (base - 1) for base, exponent in prime_factors(n)) - n
 
 
-def proper_factors(n: int):
-    # numbers less than n which divide evenly into n
+def positive_divisors(n: int) -> Iterator[int]:
+    # positive integers less than or equal to n which divide evenly into n.
     assert n > 0
-    all_factors = {1}
-    prime_counts = {factor: exponent for factor, exponent in prime_factors(n)}
-    all_factors.update(prime_counts.keys())
-    exponents = itertools.product(*(range(n + 1) for n in prime_counts.values()))
-    factors = (zip(prime_counts.keys(), e) for e in exponents if sum(e) >= 2)
-    all_factors.update((prod(p ** e for p, e in f) for f in factors))
-    all_factors.remove(n)
-    return sorted(all_factors)
+    factors = prime_factors(n)
+
+    def __generate():
+        try:
+            prime, exponent = next(factors)
+        except StopIteration:
+            yield 1
+            return
+        for factor in __generate():
+            prime_to_i = 1
+            # prime_to_i iterates prime**i values, i being all possible exponents
+            for _ in range(exponent + 1):
+                yield factor * prime_to_i
+                prime_to_i *= prime
+
+    return __generate()
 
 
 def factorial(n: int):

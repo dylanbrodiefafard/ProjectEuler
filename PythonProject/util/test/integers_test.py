@@ -63,13 +63,13 @@ class IntegersTest(TestCase):
         self.assertListEqual([(3, 1), (7, 2)], list(prime_factors(147)))
         self.assertListEqual([(2, 1), (3, 1), (5, 1), (11, 1)], list(prime_factors(330)))
 
-    def test_proper_factors(self):
-        self.assertListEqual([], list(proper_factors(1)))
-        self.assertListEqual([1], list(proper_factors(2)))
-        self.assertListEqual([1], list(proper_factors(3)))
-        self.assertListEqual([1, 2, 3, 4, 6], list(proper_factors(12)))
-        self.assertListEqual([1, 3, 7, 21, 49], list(proper_factors(147)))
-        self.assertListEqual([1, 2, 3, 5, 6, 10, 11, 15, 22, 30, 33, 55, 66, 110, 165], list(proper_factors(330)))
+    def test_positive_divisors(self):
+        self.assertListEqual([1], sorted(positive_divisors(1)))
+        self.assertListEqual([1, 2], sorted(positive_divisors(2)))
+        self.assertListEqual([1, 3], sorted(positive_divisors(3)))
+        self.assertListEqual([1, 2, 3, 4, 6, 12], sorted(positive_divisors(12)))
+        self.assertListEqual([1, 3, 7, 21, 49, 147], sorted(positive_divisors(147)))
+        self.assertListEqual([1, 2, 3, 5, 6, 10, 11, 15, 22, 30, 33, 55, 66, 110, 165, 330], sorted(positive_divisors(330)))
 
     def test_num_divisors(self):
         self.assertEqual(0, num_divisors(0))

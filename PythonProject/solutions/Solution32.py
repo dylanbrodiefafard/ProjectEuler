@@ -1,7 +1,7 @@
 from collections import Counter
 
 from solutions.SolutionBase import SolutionBase
-from util.integers import proper_factors
+from util.integers import positive_divisors
 
 
 class Solution32(SolutionBase):
@@ -19,7 +19,7 @@ class Solution32(SolutionBase):
             return  # Exit early when we have a zero in the number.
         if len(product_digit_counts := Counter(product_digits)) != len(product_digits):
             return  # Return early when the product has duplicate digits (cannot be pandigital)
-        factors = proper_factors(product)[1:]  # Ignore the '1' factor for every number
+        factors = sorted(positive_divisors(product))[1:-1]  # Ignore '1' and 'n' factors for every number
         if not factors:
             return  # prime
         for multiplicand, multiplier in zip(factors, reversed(factors)):

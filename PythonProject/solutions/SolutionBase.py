@@ -16,7 +16,7 @@ class SolutionBase(object):
     def url(self):
         return 'https://projecteuler.net/problem={}'.format(self.NUMBER)
 
-    def run_tests(self, test_case: unittest.TestCase):
+    def run_tests(self, test_case):
         raise NotImplementedError()
 
     def get_answer(self):

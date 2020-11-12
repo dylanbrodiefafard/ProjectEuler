@@ -113,7 +113,7 @@ class Solution96(SolutionBase):
         for i, line in enumerate(self.get_lines_from_data_file_in_archive('p096.zip', 'p096_sudoku.txt')):
             if i % 10 == 0:
                 continue
-            grid += line.strip()
+            grid += line
             if len(grid) == 81:
                 answer += int(SuDokuPuzzle(grid).solve()[:3])
                 grid = ''

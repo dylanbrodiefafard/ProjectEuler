@@ -43,7 +43,7 @@ class Solution11(SolutionBase):
 
     def get_answer(self):
         grid = [
-            list(map(int, line.strip().split()))
+            list(map(int, line.split()))
             for line in self.get_lines_from_data_file_in_archive('p011.zip', 'p011_grid.txt')
         ]
         return self.largest_adjacent_product_in_grid(grid, 4)

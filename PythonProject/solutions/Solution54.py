@@ -93,7 +93,7 @@ class Solution54(SolutionBase):
 
     @staticmethod
     def get_winner(line):
-        cards = line.strip().split(' ')
+        cards = line.split(' ')
         return 2 if FiveCardPokerHand(cards[:5]).less_than(FiveCardPokerHand(cards[5:])) else 1
 
     def get_answer(self):

@@ -73,8 +73,7 @@ class Solution89(SolutionBase):
 
     def get_answer(self):
         numeral_length = minimal_numeral_length = 0
-        for line in self.get_lines_from_data_file_in_archive('p089.zip', 'p089_roman.txt'):
-            numeral = line.strip()
+        for numeral in self.get_lines_from_data_file_in_archive('p089.zip', 'p089_roman.txt'):
             numeral_length += len(numeral)
             minimal_numeral_length += len(to_roman(from_roman(numeral)))
         return numeral_length - minimal_numeral_length

@@ -46,7 +46,7 @@ class SolutionBase(object):
         filepath = os.path.join(os.path.dirname(solutions.SolutionBase.__file__), '..', 'data', archive)
         with ZipFile(filepath) as zip_f:
             with zip_f.open(filename) as f:
-                return [line.decode("utf-8") for line in f.readlines()]
+                return [line.decode("utf-8").strip() for line in f.readlines()]
 
     def print_answer(self, run_tests=True):
         if run_tests:

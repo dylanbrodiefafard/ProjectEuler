@@ -1,32 +1,31 @@
 import itertools
 from functools import reduce, total_ordering
-from math import gcd
-from typing import Iterable, Iterator
+from math import gcd, isqrt
 
 from util.more_functools import prod
 
 
-def prepend_digits(digits: int, number: int):
+def prepend_digits(digits, number):
     sign = 1 if number >= 0 else -1
     return sign * int('%d%d' % (digits, abs(number)))
 
 
-def append_digits(number: int, digits: int):
+def append_digits(number, digits):
     sign = 1 if number >= 0 else -1
     return sign * int('%d%d' % (abs(number), digits))
 
 
-def is_palindrome(n: int):
+def is_palindrome(n):
     digits = str(n)
     reversed_digits = digits[::-1]
     return digits == reversed_digits
 
 
-def digital_sum(n: int):
+def digital_sum(n):
     return sum(map(int, str(n)))
 
 
-def pythagorean_triples(c_max: int):
+def pythagorean_triples(c_max):
     triples = set()
     for a in range(1, c_max + 1):
         b = a + 1
@@ -40,7 +39,7 @@ def pythagorean_triples(c_max: int):
     return triples
 
 
-def prime_factors(number: int):
+def prime_factors(number):
     # Source: https://paulrohan.medium.com/prime-factorization-of-a-number-in-python-and-why-we-check-upto-the-square-root-of-the-number-111de56541f
     if number < 2:
         return
@@ -64,15 +63,14 @@ def prime_factors(number: int):
         yield int(number), 1
 
 
-def num_divisors(n: int):
+def num_divisors(n):
     if n == 0 or n == 1 or n == 2:
         return n
     return prod(((exponent + 1) for _, exponent in prime_factors(n)))
 
 
-def aliquot_sum(n: int) -> int:
-    """
-    The aliquot sum s(n) of a positive integer n is the sum of all proper divisors of n
+def aliquot_sum(n):
+    """The aliquot sum s(n) of a positive integer n is the sum of all proper divisors of n
     (all divisors of n other than n itself).
     """
     if 0 < n < 4:
@@ -80,7 +78,7 @@ def aliquot_sum(n: int) -> int:
     return prod((base ** (exponent + 1) - 1) // (base - 1) for base, exponent in prime_factors(n)) - n
 
 
-def positive_divisors(n: int) -> Iterator[int]:
+def positive_divisors(n):
     # positive integers less than or equal to n which divide evenly into n.
     assert n > 0
     factors = prime_factors(n)
@@ -101,15 +99,16 @@ def positive_divisors(n: int) -> Iterator[int]:
     return __generate()
 
 
-def factorial(n: int):
+def factorial(n):
     assert n >= 0
     return prod(range(1, n + 1))
 
 
-def multiplicative_order(a: int, m: int):
-    # Computes the multiplicative order of b module n
-    # i.e., find the small k such that b ** k == 1 mod n
-    # Source: https://rosettacode.org/wiki/Multiplicative_order#Python
+def multiplicative_order(a, m):
+    """Computes the multiplicative order of b module n
+    i.e., find the small k such that b ** k == 1 mod n
+    Source: https://rosettacode.org/wiki/Multiplicative_order#Python
+    """
     assert gcd(a, m) == 1
 
     def _mult_ord(_a, _p, _e):
@@ -129,7 +128,7 @@ def multiplicative_order(a: int, m: int):
     return reduce(lcm, (_mult_ord(a, f, e) for f, e in prime_factors(m)))
 
 
-def simplified_continued_fraction(denominators: Iterable[int], base: int, n: int) -> (int, int):
+def simplified_continued_fraction(denominators, base, n):
     if n == 0:
         return base, 1
     numerator = 1
@@ -138,6 +137,10 @@ def simplified_continued_fraction(denominators: Iterable[int], base: int, n: int
     for d in denominators[-2::-1]:
         numerator, denominator = denominator, d * denominator + numerator
     return numerator + base * denominator, denominator
+
+
+def is_square(n):
+    return n == isqrt(n) ** 2
 
 
 @total_ordering

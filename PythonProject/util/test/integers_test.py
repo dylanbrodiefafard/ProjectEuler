@@ -116,3 +116,13 @@ class IntegersTest(TestCase):
         self.assertEqual(1, aliquot_sum(17))
         self.assertEqual(42, aliquot_sum(30))
         self.assertEqual(106, aliquot_sum(80))
+
+    def test_is_square(self):
+        self.assertTrue(is_square(16))
+        self.assertTrue(is_square(4))
+        self.assertTrue(is_square(9))
+        self.assertTrue(is_square(152415789666209426002111556165263283035677489))
+        self.assertFalse(is_square(10))
+        self.assertFalse(is_square(17))
+        self.assertFalse(is_square(48))
+        self.assertFalse(is_square(152415789666209426002111556165263283035677490))

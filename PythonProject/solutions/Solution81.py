@@ -1,5 +1,4 @@
 from collections import defaultdict
-from typing import List
 
 from solutions.SolutionBase import SolutionBase
 from util.integers import POSITIVE_INFINITY
@@ -20,7 +19,7 @@ class Solution81(SolutionBase):
         test_case.assertEqual(2427, self.minimal_path_sum(self.SMALL_MATRIX))
 
     @staticmethod
-    def minimal_path_sum(matrix: List[List[int]]) -> int:
+    def minimal_path_sum(matrix):
         # Propagate minimum of children backwards.
         min_of_children = defaultdict(lambda: POSITIVE_INFINITY)
         for row_i, row in reversed(list(enumerate(matrix))):
@@ -29,10 +28,10 @@ class Solution81(SolutionBase):
                 if min_value_of_children is not POSITIVE_INFINITY:
                     val += min_value_of_children
                 min_of_children[(row_i, col_i)] = val
-        return min_of_children[(0, 0)]
+        return min_of_children.get((0, 0))
 
     @staticmethod
-    def matrix_from_lines(lines: List[str]) -> List[List[int]]:
+    def matrix_from_lines(lines):
         return [list(map(int, line.split(','))) for line in lines]
 
     def get_answer(self):

@@ -7,9 +7,9 @@ from util.sequences import *
 class SequencesTest(TestCase):
     def test_positive_integers(self):
         integers_gen = positive_integers()
-        self.assertListEqual([0, 1, 2, 3, 4], list(islice(integers_gen, 5)))
+        self.assertListEqual([1, 2, 3, 4, 5], list(islice(integers_gen, 5)))
         list(islice(integers_gen, 20))
-        self.assertListEqual([25, 26, 27, 28, 29], list(islice(integers_gen, 5)))
+        self.assertListEqual([26, 27, 28, 29, 30], list(islice(integers_gen, 5)))
 
     def test_triangle(self):
         triangle_gen = triangle()

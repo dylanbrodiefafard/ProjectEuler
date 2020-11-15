@@ -2,7 +2,8 @@ from util.integers import aliquot_sum
 
 
 def positive_integers():
-    n = 0
+    """The sequence of positive integers according to https://oeis.org/A000027"""
+    n = 1
     while True:
         yield n
         n += 1

@@ -1,6 +1,6 @@
 import itertools
 from functools import reduce, total_ordering
-from math import gcd, isqrt
+from math import gcd, isqrt, floor
 
 from util.more_functools import prod
 
@@ -81,7 +81,10 @@ def aliquot_sum(n):
 def positive_divisors(n):
     # positive integers less than or equal to n which divide evenly into n.
     assert n > 0
-    factors = prime_factors(n)
+    return divisors_from_prime_factors(prime_factors(n))
+
+
+def divisors_from_prime_factors(factors):
 
     def __generate():
         try:
@@ -111,7 +114,7 @@ def multiplicative_order(a, m):
     """
     assert gcd(a, m) == 1
 
-    def _mult_ord(_a, _p, _e):
+    def _multiplicative_order(_a, _p, _e):
         _m = _p ** _e
         _t = (_p - 1) * (_p ** (_e - 1))
         _qs = [1]
@@ -122,10 +125,10 @@ def multiplicative_order(a, m):
             if pow(_a, _q, _m) == 1:
                 return _q
 
-    def lcm(_a, _b):
-        return (_a * _b) / gcd(_a, _b)
+    def _lcm(_a, _b):
+        return (_a * _b) // gcd(_a, _b)
 
-    return reduce(lcm, (_mult_ord(a, f, e) for f, e in prime_factors(m)))
+    return reduce(_lcm, (_multiplicative_order(a, f, e) for f, e in prime_factors(m)))
 
 
 def simplified_continued_fraction(denominators, base, n):
@@ -141,6 +144,44 @@ def simplified_continued_fraction(denominators, base, n):
 
 def is_square(n):
     return n == isqrt(n) ** 2
+
+
+def eulers_totient(n):
+    """
+    Euler's totient function counts the positive integers
+    up to a given integer n that are relatively prime to n.
+    """
+    return prod((
+        base ** (exp - 1) * (base - 1)
+        for base, exp in prime_factors(n)
+    ))
+
+
+def moebius(n):
+    """
+    For any positive integer n, define moebius(n) as
+    the sum of the primitive nth roots of unity.
+    It has values in {−1, 0, 1} depending on the factorization of n into prime factors:
+
+    * moebius(n) = 1 if n is a square-free positive integer with an even number of prime factors.
+    * moebius(n) = −1 if n is a square-free positive integer with an odd number of prime factors.
+    * moebius(n) = 0 if n has a squared prime factor.
+    """
+    m = 1
+    for base, exp in prime_factors(n):
+        if exp >= 2:
+            return 0
+        m *= -1
+    return m
+
+
+def totient_sum(n):
+    s = 0
+    for k in range(1, n + 1):
+        s += moebius(k) * (floor(n / k) ** 2)
+    s = (1 + s) / 2
+    assert s.is_integer()
+    return int(s)
 
 
 @total_ordering

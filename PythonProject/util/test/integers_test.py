@@ -126,3 +126,34 @@ class IntegersTest(TestCase):
         self.assertFalse(is_square(17))
         self.assertFalse(is_square(48))
         self.assertFalse(is_square(152415789666209426002111556165263283035677490))
+
+    def test_eulers_totient(self):
+        self.assertEqual(1, eulers_totient(1))
+        self.assertEqual(1, eulers_totient(2))
+        self.assertEqual(2, eulers_totient(3))
+        self.assertEqual(2, eulers_totient(4))
+        self.assertEqual(4, eulers_totient(12))
+        self.assertEqual(8, eulers_totient(30))
+        self.assertEqual(144, eulers_totient(468))
+        self.assertEqual(396, eulers_totient(469))
+
+    def test_mobius(self):
+        self.assertEqual(-1, moebius(2))
+        self.assertEqual(-1, moebius(3))
+        self.assertEqual(-1, moebius(5))
+        self.assertEqual(-1, moebius(30))
+        self.assertEqual(0, moebius(4))
+        self.assertEqual(0, moebius(8))
+        self.assertEqual(0, moebius(9))
+        self.assertEqual(0, moebius(27))
+        self.assertEqual(1, moebius(1))
+        self.assertEqual(1, moebius(6))
+        self.assertEqual(1, moebius(10))
+        self.assertEqual(1, moebius(22))
+
+    def test_totient_sum(self):
+        self.assertEqual(1, totient_sum(1))
+        self.assertEqual(2, totient_sum(2))
+        self.assertEqual(4, totient_sum(3))
+        self.assertEqual(360, totient_sum(34))
+        self.assertEqual(964, totient_sum(56))

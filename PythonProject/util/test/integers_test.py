@@ -157,3 +157,12 @@ class IntegersTest(TestCase):
         self.assertEqual(4, totient_sum(3))
         self.assertEqual(360, totient_sum(34))
         self.assertEqual(964, totient_sum(56))
+
+    def test_num_proper_permutations_of_digits(self):
+        self.assertEqual(1, num_proper_permutations_of_digits([1]))
+        self.assertEqual(2, num_proper_permutations_of_digits([1, 2]))
+        self.assertEqual(4, num_proper_permutations_of_digits([1, 2, 0]))
+        self.assertEqual(1, num_proper_permutations_of_digits([0, 1]))
+        self.assertEqual(1, num_proper_permutations_of_digits([1, 1]))
+        self.assertEqual(1050, num_proper_permutations_of_digits([0, 0, 0, 1, 1, 3, 7, 7]))
+        self.assertEqual(1050, num_proper_permutations_of_digits(['0', '0', '0', '1', '1', '3', '7', '7'], zero_value='0'))

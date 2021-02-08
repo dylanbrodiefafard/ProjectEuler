@@ -1,6 +1,7 @@
 import itertools
+from collections import Counter
 from functools import reduce, total_ordering
-from math import gcd, isqrt, floor
+from math import gcd, isqrt, floor, comb
 
 from util.more_functools import prod
 
@@ -182,6 +183,17 @@ def totient_sum(n):
     s = (1 + s) / 2
     assert s.is_integer()
     return int(s)
+
+
+def num_proper_permutations_of_digits(digits, zero_value=0):
+    digit_counts = Counter(digits)
+    num_zeros = digit_counts.get(zero_value)
+    n = len(digits)
+    if num_zeros is None:
+        return factorial(n) / prod(map(factorial, digit_counts.values()))
+    else:
+        del digit_counts[zero_value]
+        return comb(n - 1, num_zeros) * (factorial(n - num_zeros) / prod(map(factorial, digit_counts.values())))
 
 
 @total_ordering

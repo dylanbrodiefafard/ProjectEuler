@@ -1,7 +1,6 @@
 import operator
 from functools import reduce
-from typing import Iterable
 
 
-def prod(iterable: Iterable[int], start_val=1) -> int:
+def prod(iterable, start_val=1):
     return reduce(operator.mul, iterable, start_val)

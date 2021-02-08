@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.sequences import triangle
+from util.sequences import triangular_numbers
 
 
 class Solution42(SolutionBase):
@@ -11,7 +11,7 @@ class Solution42(SolutionBase):
 
     def __init__(self):
         self._triangle_numbers = set()
-        self._triangular_generator = triangle()
+        self._triangular_generator = triangular_numbers()
         self._max_triangle_number = 0
 
     def run_tests(self, test_case):

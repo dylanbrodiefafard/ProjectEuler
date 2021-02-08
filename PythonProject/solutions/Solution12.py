@@ -1,6 +1,6 @@
 from solutions.SolutionBase import SolutionBase
 from util.integers import num_divisors
-from util.sequences import triangle
+from util.sequences import triangular_numbers
 
 
 class Solution12(SolutionBase):
@@ -16,7 +16,7 @@ class Solution12(SolutionBase):
 
     @staticmethod
     def first_triangle_number_over_divisors(n):
-        for number in triangle():
+        for number in triangular_numbers():
             if num_divisors(number) > n:
                 return number
 

@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes_up_to
+from util.sequences import prime_numbers_up_to
 
 
 class Solution49(SolutionBase):
@@ -12,7 +12,7 @@ class Solution49(SolutionBase):
 
     @staticmethod
     def prime_permutations():
-        four_digit_primes = {p for p in primes_up_to(9999) if p > 1000}
+        four_digit_primes = {p for p in prime_numbers_up_to(9999) if p > 1000}
         for p1 in sorted(four_digit_primes):
             p2, p3 = p1 + 3330, p1 + 2 * 3330
             if p2 in four_digit_primes and p3 in four_digit_primes:

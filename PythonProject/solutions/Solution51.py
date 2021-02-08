@@ -1,7 +1,8 @@
 from collections import defaultdict
 
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes, is_prime
+from util.primes import is_prime
+from util.sequences import prime_numbers
 
 
 class Solution51(SolutionBase):
@@ -62,7 +63,7 @@ class Solution51(SolutionBase):
 
     def get_answer(self):
         self._max_prime_value_families.clear()
-        for p in primes():
+        for p in prime_numbers():
             if self.max_prime_value_family(p) == 8:
                 return p
 

@@ -28,7 +28,7 @@ class IntegersTest(TestCase):
         self.assertEqual(123456, append_digits(123, 456))
         self.assertEqual(-123456, append_digits(-123, 456))
 
-    def test_is_paldindrome(self):
+    def test_is_palindrome(self):
         self.assertTrue(is_palindrome(313))
         self.assertTrue(is_palindrome(101))
         self.assertTrue(is_palindrome(11))

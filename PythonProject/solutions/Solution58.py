@@ -1,6 +1,6 @@
 from solutions.SolutionBase import SolutionBase
 from util.primes import is_prime
-from util.sequences import spiral_diagonal
+from util.sequences import ulams_spiral_diagonal_numbers
 
 
 class Solution58(SolutionBase):
@@ -14,7 +14,8 @@ class Solution58(SolutionBase):
         side_length = 3
         num_primes_along_diagonals = 0
         num_along_diagonals = 1
-        values_along_diagonals_gen = spiral_diagonal()
+        values_along_diagonals_gen = ulams_spiral_diagonal_numbers()
+        next(values_along_diagonals_gen)  # skip 1
         while True:
             for _ in range(4):
                 if is_prime(next(values_along_diagonals_gen)):

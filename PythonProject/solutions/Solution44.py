@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.sequences import pentagonal
+from util.sequences import pentagonal_numbers
 
 
 class Solution44(SolutionBase):
@@ -8,7 +8,7 @@ class Solution44(SolutionBase):
 
     def __init__(self):
         self._pentagonal_numbers = set()
-        self._pentagonal_numbers_generator = pentagonal()
+        self._pentagonal_numbers_generator = pentagonal_numbers()
         self._max_pentagonal_number = -1
 
     def run_tests(self, test_case):
@@ -23,9 +23,9 @@ class Solution44(SolutionBase):
 
     def get_answer(self):
         min_diff = 10e100
-        pentagonal_numbers = pentagonal()
-        next(pentagonal_numbers)
-        candidates = [next(pentagonal_numbers), next(pentagonal_numbers)]
+        pentagonal_numbers_gen = pentagonal_numbers()
+        next(pentagonal_numbers_gen)
+        candidates = [next(pentagonal_numbers_gen), next(pentagonal_numbers_gen)]
         while len(candidates) > 1:
             i = 0
             highest_candidate = candidates[-1]
@@ -42,7 +42,7 @@ class Solution44(SolutionBase):
                     min_diff = p_diff
                 i += 1
 
-            next_candidate = next(pentagonal_numbers)
+            next_candidate = next(pentagonal_numbers_gen)
             if next_candidate - candidates[-1] < min_diff:
                 candidates.append(next_candidate)
 

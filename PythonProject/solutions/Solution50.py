@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes_up_to
+from util.sequences import prime_numbers_up_to
 
 
 class Solution50(SolutionBase):
@@ -16,7 +16,7 @@ class Solution50(SolutionBase):
     @staticmethod
     def longest_prime_sum_of_consecutive_primes(below: int):
         best_prime_sum, best_length = 0, 0
-        primes = list(primes_up_to(below - 1))
+        primes = list(prime_numbers_up_to(below - 1))
         primes_set = set(primes)
         num_primes = len(primes)
 

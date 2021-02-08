@@ -1,7 +1,7 @@
 from collections import deque
 
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes_up_to
+from util.sequences import prime_numbers_up_to
 
 
 class Solution35(SolutionBase):
@@ -13,7 +13,7 @@ class Solution35(SolutionBase):
 
     @staticmethod
     def circular_primes(up_to: int):
-        primes = set(primes_up_to(up_to))
+        primes = set(prime_numbers_up_to(up_to))
         circular_primes = []
         while primes:
             circular_family = [prime := primes.pop()]

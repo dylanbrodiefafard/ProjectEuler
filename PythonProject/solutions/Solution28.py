@@ -1,7 +1,7 @@
 from itertools import islice
 
 from solutions.SolutionBase import SolutionBase
-from util.sequences import spiral_diagonal
+from util.sequences import ulams_spiral_diagonal_numbers
 
 
 class Solution28(SolutionBase):
@@ -15,7 +15,7 @@ class Solution28(SolutionBase):
     def sum_of_diagonal_on_spiral(n: int):
         assert n > 0
         num_layers = (n - 1) // 2
-        return 1 + sum(islice(spiral_diagonal(), 4 * num_layers))
+        return sum(islice(ulams_spiral_diagonal_numbers(), 1 + 4 * num_layers))
 
     def get_answer(self):
         return self.sum_of_diagonal_on_spiral(1001)

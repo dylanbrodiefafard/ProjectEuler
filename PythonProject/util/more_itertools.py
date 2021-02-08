@@ -15,15 +15,15 @@ def exactly_n(iterable, n):
     return count == n
 
 
-def first_true(iterable, default=False, pred=None):
+def first_true(iterable, default=False, predicate=None):
     """Returns the first true value in the iterable.
 
     If no true value is found, returns *default*
 
-    If *pred* is not None, returns the first item
-    for which pred(item) is true.
+    If *predicate* is not None, returns the first item
+    for which predicate(item) is true.
     """
-    return next(filter(pred, iterable), default)
+    return next(filter(predicate, iterable), default)
 
 
 def str_product(a, b):

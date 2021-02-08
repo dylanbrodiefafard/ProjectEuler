@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.sequences import pentagonal, hexagonal, triangle
+from util.sequences import pentagonal_numbers, hexagonal_numbers, triangular_numbers
 
 
 class Solution45(SolutionBase):
@@ -18,11 +18,11 @@ class Solution45(SolutionBase):
 
     @staticmethod
     def triangular_pentagonal_hexagonal():
-        pentagonal_generator = enumerate(pentagonal())
-        hexagonal_generator = enumerate(hexagonal())
+        pentagonal_generator = enumerate(pentagonal_numbers())
+        hexagonal_generator = enumerate(hexagonal_numbers())
         p_i, p = next(pentagonal_generator)
         h_i, h = next(hexagonal_generator)
-        for t_i, t in enumerate(triangle()):
+        for t_i, t in enumerate(triangular_numbers()):
             while t > p:
                 p_i, p = next(pentagonal_generator)
             while t > h:

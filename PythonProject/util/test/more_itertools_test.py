@@ -16,8 +16,8 @@ class MoreItertoolsTest(TestCase):
         self.assertFalse(first_true(()))
         self.assertEqual(2, first_true((False, [], 2, 3)))
         self.assertEqual(3, first_true((False, [], {}), default=3))
-        self.assertEqual(4, first_true((2, 3, 4, 5), default=3, pred=lambda x: x > 3))
-        self.assertEqual(42, first_true((2, 3, -4, -5), default=42, pred=lambda x: x > 3))
+        self.assertEqual(4, first_true((2, 3, 4, 5), default=3, predicate=lambda x: x > 3))
+        self.assertEqual(42, first_true((2, 3, -4, -5), default=42, predicate=lambda x: x > 3))
 
     def test_str_product(self):
         self.assertListEqual(['A1', 'A2', 'A3'], list(str_product('A', '123')))

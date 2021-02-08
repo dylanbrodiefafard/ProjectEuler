@@ -2,13 +2,13 @@ from collections import defaultdict
 from itertools import takewhile
 
 from solutions.SolutionBase import SolutionBase
-from util.sequences import triangle, octagonal, heptagonal, hexagonal, pentagonal, square
+from util.sequences import triangular_numbers, octagonal_numbers, heptagonal_numbers, hexagonal_numbers, pentagonal_numbers, squares
 
 
 class Solution61(SolutionBase):
     NUMBER = 61
     VERIFIED_ANSWER = 28684
-    GENERATORS = (triangle, square, pentagonal, hexagonal, heptagonal, octagonal)
+    GENERATORS = (triangular_numbers, squares, pentagonal_numbers, hexagonal_numbers, heptagonal_numbers, octagonal_numbers)
 
     def run_tests(self, test_case):
         test_case.assertSetEqual({8128, 2882, 8281}, self.cyclical_figurate_numbers(3))

@@ -1,7 +1,7 @@
 from itertools import takewhile
 
 from solutions.SolutionBase import SolutionBase
-from util.sequences import abundant
+from util.sequences import abundant_numbers
 
 
 class Solution23(SolutionBase):
@@ -14,13 +14,13 @@ class Solution23(SolutionBase):
     @staticmethod
     def positive_integers_cannot_be_written_as_sum_of_abundant_numbers(max_value: int):
         positive_integers = set(range(max_value + 1))
-        abundant_numbers = list(takewhile(lambda n: n <= (max_value - 12), abundant()))
-        num_abundant = len(abundant_numbers)
-        for i, n_i in enumerate(abundant_numbers):
+        some_abundant_numbers = list(takewhile(lambda n: n <= (max_value - 12), abundant_numbers()))
+        num_abundant = len(some_abundant_numbers)
+        for i, n_i in enumerate(some_abundant_numbers):
             if n_i // 2 > max_value:
                 break
             for j in range(i, num_abundant):
-                if (s := n_i + abundant_numbers[j]) > max_value:
+                if (s := n_i + some_abundant_numbers[j]) > max_value:
                     break
                 positive_integers.discard(s)
         return positive_integers

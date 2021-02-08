@@ -1,5 +1,5 @@
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes
+from util.sequences import prime_numbers
 
 
 class Solution46(SolutionBase):
@@ -15,7 +15,7 @@ class Solution46(SolutionBase):
         test_case.assertTupleEqual((31, 1), self.get_coefficients(33, {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31}))
 
     def get_answer(self):
-        primes_generator = primes()
+        primes_generator = prime_numbers()
         primes_so_far = [next(primes_generator)]
         get_coefficients = self.get_coefficients
         max_prime = max(primes_so_far)

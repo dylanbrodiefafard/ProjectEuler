@@ -1,14 +1,12 @@
-from __future__ import annotations
-from typing import List, Optional
 from heapdict import heapdict
 
 
 class Vertex(object):
-    __slots__ = ['_name', '_neighbors']
+    __slots__ = ['_name', '_neighbours']
 
-    def __init__(self, name: str):
+    def __init__(self, name):
         self._name = name
-        self._neighbors = set()
+        self._neighbours = set()
 
     def __str__(self):
         return self.name
@@ -16,14 +14,14 @@ class Vertex(object):
     __repr__ = __str__
 
     def __iter__(self):
-        return iter(self._neighbors)
+        return iter(self._neighbours)
 
     @property
     def name(self):
         return self._name
 
-    def add_neighbour(self, neighbour: Vertex):
-        self._neighbors.add(neighbour)
+    def add_neighbour(self, neighbour):
+        self._neighbours.add(neighbour)
 
 
 class Graph(object):
@@ -36,7 +34,7 @@ class Graph(object):
     def __iter__(self):
         return iter(self._vertices_by_name.values())
 
-    def add_edge(self, vertex1: Vertex, vertex2: Vertex, distance: float, directed: bool = True) -> None:
+    def add_edge(self, vertex1, vertex2, distance, directed=True):
         if vertex1.name in self._vertices_by_name and vertex1 != self._vertices_by_name[vertex1.name]:
             raise ValueError(f'Vertex "{vertex1.name}" already exists!')
         if vertex2.name in self._vertices_by_name and vertex2 != self._vertices_by_name[vertex2.name]:
@@ -50,7 +48,7 @@ class Graph(object):
             vertex2.add_neighbour(vertex1)
             self._distances[(vertex2, vertex1)] = distance
 
-    def vertex(self, name: str, create: bool = False) -> Vertex:
+    def vertex(self, name, create=False):
         if name not in self._vertices_by_name:
             if create:
                 self._vertices_by_name[name] = Vertex(name)
@@ -58,13 +56,13 @@ class Graph(object):
                 raise ValueError(f'Vertex "{name}" does not exist.')
         return self._vertices_by_name[name]
 
-    def distance(self, vertex1: Vertex, vertex2: Vertex) -> float:
+    def distance(self, vertex1, vertex2):
         if (vertex1, vertex2) not in self._distances:
             raise ValueError(f'No edge between {vertex1} and {vertex2}.')
         return self._distances[(vertex1, vertex2)]
 
 
-def dijkstra(graph: Graph, source: Vertex, destination: Optional[Vertex] = None) -> (float, List[Vertex]):
+def dijkstra(graph, source, destination=None):
     dist = {}
     prev = {}
     queue = heapdict()

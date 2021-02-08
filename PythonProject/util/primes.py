@@ -1,38 +1,8 @@
-from itertools import takewhile, compress, islice, count, cycle
+from itertools import takewhile
 
+from util.sequences import prime_numbers
 
-def primes():
-    # Source: https://stackoverflow.com/a/3796442
-    yield from [2, 3, 5]
-
-    divisors = {9: 3, 25: 5}
-    mask = (1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0)
-    modulos = frozenset((1, 7, 11, 13, 17, 19, 23, 29))
-
-    for q in compress(islice(count(7), 0, None, 2), cycle(mask)):
-        p = divisors.pop(q, None)
-        if p is None:
-            divisors[q * q] = q
-            yield q
-        else:
-            x = q + 2 * p
-            while x in divisors or (x % 30) not in modulos:
-                x += 2 * p
-            divisors[x] = p
-
-
-def primes_up_to(n: int):
-    yield 2
-    assumed_primes = set(range(3, n + 1, 2))
-    for maybe_prime in range(3, n + 1, 2):
-        if maybe_prime not in assumed_primes:
-            continue
-        yield maybe_prime
-        for multiple in range(maybe_prime ** 2, n + 1, 2 * maybe_prime):
-            assumed_primes.discard(multiple)
-
-
-_known_primes = {p: None for p in takewhile(lambda p: p < 1000, primes())}
+_known_primes = {p: None for p in takewhile(lambda p: p < 1000, prime_numbers())}
 _bases_by_limit = {
     2047: (2, ),
     1373653: (2, 3),
@@ -50,9 +20,11 @@ _bases_by_limit = {
 }
 
 
-def is_prime(n: int):
-    # Source: https://rosettacode.org/wiki/Miller%E2%80%93Rabin_primality_test#Python
-    # Updated with bases from: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Deterministic_variants
+def is_prime(n):
+    """
+    reference: https://rosettacode.org/wiki/Miller%E2%80%93Rabin_primality_test#Python
+    updated with bases from: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Deterministic_variants
+    """
     if n in (0, 1):
         return False
     if n in _known_primes:

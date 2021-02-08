@@ -1,7 +1,7 @@
 from itertools import islice
 
 from solutions.SolutionBase import SolutionBase
-from util.primes import primes
+from util.sequences import prime_numbers
 
 
 class Solution7(SolutionBase):
@@ -13,7 +13,7 @@ class Solution7(SolutionBase):
 
     @staticmethod
     def get_nth_prime(n):
-        return next(islice(primes(), n - 1, None))
+        return next(islice(prime_numbers(), n - 1, None))
 
     def get_answer(self):
         return self.get_nth_prime(10001)

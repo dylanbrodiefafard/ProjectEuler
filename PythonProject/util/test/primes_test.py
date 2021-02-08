@@ -4,21 +4,6 @@ from util.primes import *
 
 
 class PrimesTest(TestCase):
-    def test_primes(self):
-        primes_gen = primes()
-        # test primes 1-5 are correct
-        self.assertListEqual([2, 3, 5, 7, 11], list(islice(primes_gen, 5)))
-        list(islice(primes_gen, 95))  # skip 95 primes
-        # test that primes 101-105 are correct
-        self.assertListEqual([547, 557, 563, 569, 571], list(islice(primes_gen, 5)))
-
-    def test_primes_up_to(self):
-        primes_gen = primes_up_to(571)
-        # test primes 1-5 are correct
-        self.assertListEqual([2, 3, 5, 7, 11], list(islice(primes_gen, 5)))
-        list(islice(primes_gen, 95))  # skip 95 primes
-        # test that primes 101-105 are correct
-        self.assertListEqual([547, 557, 563, 569, 571], list(islice(primes_gen, 5)))
 
     def test_is_prime(self):
         self.assertFalse(is_prime(1))

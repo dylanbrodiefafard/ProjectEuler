@@ -177,12 +177,13 @@ def moebius(n):
 
 
 def totient_sum(n):
-    s = 0
-    for k in range(1, n + 1):
-        s += moebius(k) * (floor(n / k) ** 2)
-    s = (1 + s) / 2
-    assert s.is_integer()
-    return int(s)
+    phi = list(range(n + 1))
+    for i, phi_i in enumerate(phi):
+        if i != phi_i or i < 2:
+            continue
+        for j in range(i, n + 1, i):
+            phi[j] -= phi[j] / i
+    return sum(phi)
 
 
 def num_proper_permutations_of_digits(digits, zero_value=0):

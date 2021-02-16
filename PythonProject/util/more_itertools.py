@@ -1,3 +1,4 @@
+from collections import Iterable
 from functools import partial
 from itertools import product
 
@@ -30,3 +31,19 @@ def str_product(a, b):
     """Concatenates every item from a with every item from b.
     """
     return map(partial(str.join, ''), product(a, b))
+
+
+def flatten(iterable, max_depth=None):
+    """Flattens an iterable by expanding any iterable elements.
+    If max_depth is provided, only the iterables with nesting
+    level less than max_depth are expanded.
+    """
+
+    def _flatten(_iterable, _depth):
+        for element in _iterable:
+            if (max_depth is None or _depth < max_depth) and isinstance(element, Iterable) and not isinstance(element, (str, bytes)):
+                yield from _flatten(element, _depth + 1)
+            else:
+                yield element
+
+    yield from _flatten(iterable, 0)

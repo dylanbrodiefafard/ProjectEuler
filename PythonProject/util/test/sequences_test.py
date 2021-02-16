@@ -16,6 +16,7 @@ class SequencesTest(TestCase):
         self.assertListEqual([0, 1, 3, 6, 10], list(islice(triangle_gen, 5)))
         list(islice(triangle_gen, 20))
         self.assertListEqual([325, 351, 378, 406, 435], list(islice(triangle_gen, 5)))
+        self.assertListEqual([6, 10, 15, 21, 28], list(islice(triangular_numbers(3), 5)))
 
     def test_squares(self):
         square_gen = squares()

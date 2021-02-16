@@ -13,11 +13,13 @@ def positive_integers():
         n += 1
 
 
-def triangular_numbers():
+def triangular_numbers(n=None):
     """
     https://oeis.org/A000217
     """
-    n = 0
+    if n is None:
+        n = 0
+    assert n >= 0, 'Index must be a positive integer.'
     while True:
         yield n * (n + 1) // 2
         n += 1

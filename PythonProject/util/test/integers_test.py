@@ -63,6 +63,27 @@ class IntegersTest(TestCase):
         self.assertListEqual([(3, 1), (7, 2)], list(prime_factors(147)))
         self.assertListEqual([(2, 1), (3, 1), (5, 1), (11, 1)], list(prime_factors(330)))
 
+    def test_multiplicative_partitions(self):
+        partitions = sorted(multiplicative_partitions(24))
+        self.assertTupleEqual((3, 2, 2, 2), partitions[0])
+        self.assertTupleEqual((4, 3, 2), partitions[1])
+        self.assertTupleEqual((6, 2, 2), partitions[2])
+        self.assertTupleEqual((6, 4), partitions[3])
+        self.assertTupleEqual((8, 3), partitions[4])
+        self.assertTupleEqual((12, 2), partitions[5])
+        self.assertTupleEqual((24,), partitions[6])
+        self.assertEqual(7, len(partitions))
+        partitions = sorted(multiplicative_partitions(81))
+        self.assertTupleEqual((3, 3, 3, 3), partitions[0])
+        self.assertTupleEqual((9, 3, 3), partitions[1])
+        self.assertTupleEqual((9, 9), partitions[2])
+        self.assertTupleEqual((27, 3), partitions[3])
+        self.assertTupleEqual((81,), partitions[4])
+        self.assertEqual(5, len(partitions))
+        partitions = sorted(multiplicative_partitions(3343))
+        self.assertTupleEqual((3343,), partitions[0])
+        self.assertEqual(1, len(partitions))
+
     def test_positive_divisors(self):
         self.assertListEqual([1], sorted(positive_divisors(1)))
         self.assertListEqual([1, 2], sorted(positive_divisors(2)))

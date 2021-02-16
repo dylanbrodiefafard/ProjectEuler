@@ -23,3 +23,12 @@ class MoreItertoolsTest(TestCase):
         self.assertListEqual(['A1', 'A2', 'A3'], list(str_product('A', '123')))
         self.assertListEqual(['1A', '2A', '3A'], list(str_product('123', 'A')))
         self.assertListEqual(['16', '16', '26', '26', '36', '36'], list(str_product('123', '66')))
+
+    def test_flatten(self):
+        numbers = (0, (1, 2), [3, 4], (5, (((6,),), )))
+        self.assertListEqual([0, 1, 2, 3, 4, 5, 6], list(flatten(numbers)))
+        self.assertListEqual([0, 1, 2, 3, 4, 5, (((6,),),)], list(flatten(numbers, 1)))
+        self.assertListEqual([0, 1, 2, 3, 4, 5, ((6,),)], list(flatten(numbers, 2)))
+        self.assertListEqual([0, 1, 2, 3, 4, 5, (6,)], list(flatten(numbers, 3)))
+        self.assertListEqual([0, 1, 2, 3, 4, 5, 6], list(flatten(numbers, 4)))
+        self.assertListEqual([0, 1, 2, 3, 4, 5, 6], list(flatten(numbers, 5)))

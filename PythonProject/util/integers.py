@@ -1,9 +1,10 @@
 import itertools
 from collections import Counter
 from functools import reduce, total_ordering
-from math import gcd, isqrt, floor, comb
+from math import gcd, isqrt, comb
 
 from util.more_functools import prod
+from util.more_itertools import flatten
 
 
 def prepend_digits(digits, number):
@@ -45,14 +46,7 @@ def prime_factors(number):
     if number < 2:
         return
 
-    exponent = 0
-    while number % 2 == 0:
-        exponent += 1
-        number = number / 2
-    if exponent:
-        yield 2, exponent
-
-    for i in range(3, int(number ** .5) + 1, 2):
+    for i in itertools.chain((2, 3, 5, 7), range(11, int(number ** .5) + 1, 2)):
         exponent = 0
         while number % i == 0:
             exponent += 1
@@ -62,6 +56,45 @@ def prime_factors(number):
 
     if number > 2:
         yield int(number), 1
+
+
+def multiplicative_partitions(n):
+    """Yields all (unordered) multiplicative partitions of the integer n.
+    A multiplicative partition or unordered factorization of an integer n is a way of writing n as a product of
+    integers greater than 1, treating two products as equivalent if they differ only in the ordering of the factors.
+
+    The number 20 has four multiplicative partitions:
+        * 2 × 2 × 5
+        * 2 × 10
+        * 4 × 5
+        * 20
+    """
+    assert n > 0
+
+    def _multiplicative_partitions(_m, _n):
+        # Source: Knopfmacher, Arnold & Mays, M.. (2006).
+        #   Ordered and Unordered Factorizations of Integers. Mathematica Journal. 10.
+        #   Generating Unordered Factorizations
+        if _n == 1 or _m == 1:
+            yield (),
+            return
+        divisors = positive_divisors(_n)
+        assert next(divisors) == 1  # skip 1 as a divisor
+        is_prime = True
+        for d in divisors:
+            if d != _n:
+                is_prime = False
+            elif is_prime:
+                if _m >= _n:
+                    yield _n,
+                return
+            if d <= _m:
+                for partition in _multiplicative_partitions(d, _n // d):
+                    yield tuple(flatten((d,) + partition, 1))
+            elif not is_prime:
+                return
+
+    yield from _multiplicative_partitions(n, n)
 
 
 def num_divisors(n):

@@ -1,65 +1,35 @@
+from collections import defaultdict
+
 from heapdict import heapdict
 
 
-class Vertex(object):
-    __slots__ = ['_name', '_neighbours']
-
-    def __init__(self, name):
-        self._name = name
-        self._neighbours = set()
-
-    def __str__(self):
-        return self.name
-
-    __repr__ = __str__
-
-    def __iter__(self):
-        return iter(self._neighbours)
-
-    @property
-    def name(self):
-        return self._name
-
-    def add_neighbour(self, neighbour):
-        self._neighbours.add(neighbour)
-
-
 class Graph(object):
-    __slots__ = ['_vertices_by_name', '_distances']
+    __slots__ = ['_neighbours_by_vertex', '_weights']
 
     def __init__(self):
-        self._vertices_by_name = {}
-        self._distances = {}
+        self._neighbours_by_vertex = defaultdict(set)
+        self._weights = {}
 
-    def __iter__(self):
-        return iter(self._vertices_by_name.values())
-
-    def add_edge(self, vertex1, vertex2, distance, directed=True):
-        if vertex1.name in self._vertices_by_name and vertex1 != self._vertices_by_name[vertex1.name]:
-            raise ValueError(f'Vertex "{vertex1.name}" already exists!')
-        if vertex2.name in self._vertices_by_name and vertex2 != self._vertices_by_name[vertex2.name]:
-            raise ValueError(f'Vertex "{vertex2.name}" already exists!')
-
-        vertex1.add_neighbour(vertex2)
-        self._vertices_by_name[vertex1.name] = vertex1
-        self._vertices_by_name[vertex2.name] = vertex2
-        self._distances[(vertex1, vertex2)] = distance
+    def add_edge(self, vertex1, vertex2, directed=True, weight=None):
+        self._neighbours_by_vertex[vertex1].add(vertex2)
+        other_neighbours = self._neighbours_by_vertex[vertex2]
         if not directed:
-            vertex2.add_neighbour(vertex1)
-            self._distances[(vertex2, vertex1)] = distance
+            other_neighbours.add(vertex1)
+        if weight is not None:
+            self._weights[(vertex1, vertex2)] = weight
+            if not directed:
+                self._weights[(vertex2, vertex1)] = weight
 
-    def vertex(self, name, create=False):
-        if name not in self._vertices_by_name:
-            if create:
-                self._vertices_by_name[name] = Vertex(name)
-            else:
-                raise ValueError(f'Vertex "{name}" does not exist.')
-        return self._vertices_by_name[name]
+    def neighbours(self, vertex):
+        return self._neighbours_by_vertex[vertex]
 
-    def distance(self, vertex1, vertex2):
-        if (vertex1, vertex2) not in self._distances:
+    def vertices(self):
+        return set(self._neighbours_by_vertex.keys())
+
+    def weight(self, vertex1, vertex2):
+        if (vertex1, vertex2) not in self._weights:
             raise ValueError(f'No edge between {vertex1} and {vertex2}.')
-        return self._distances[(vertex1, vertex2)]
+        return self._weights[(vertex1, vertex2)]
 
 
 def dijkstra(graph, source, destination=None):
@@ -67,7 +37,7 @@ def dijkstra(graph, source, destination=None):
     prev = {}
     queue = heapdict()
 
-    for vertex in graph:
+    for vertex in graph.vertices():
         dist[vertex] = float('+inf')
         prev[vertex] = None
         queue[vertex] = dist[vertex]
@@ -83,10 +53,10 @@ def dijkstra(graph, source, destination=None):
                     path.insert(0, u)
                     u = prev[u]
             return dist[destination], path
-        for v in u:
+        for v in graph.neighbours(u):
             if v not in queue:
                 continue
-            if (alt := dist[u] + graph.distance(u, v)) < dist[v]:
+            if (alt := dist[u] + graph.weight(u, v)) < dist[v]:
                 queue[v] = dist[v] = alt
                 prev[v] = u
 
@@ -94,3 +64,33 @@ def dijkstra(graph, source, destination=None):
         raise ValueError(f'{destination} is unreachable from {source}.')
 
     return dist, prev
+
+
+def maximal_cliques(graph, vertices=None):
+    """A clique, C, in an undirected graph G = (V, E) is a subset of the vertices,
+    C ⊆ V, such that every two distinct vertices are adjacent.
+
+    This is equivalent to the condition that the induced subgraph of G induced by C is a complete graph.
+    In some cases, the term clique may also refer to the subgraph directly.
+
+    A maximal clique is a clique that cannot be extended by including one more adjacent vertex, that is,
+    a clique which does not exist exclusively within the vertex set of a larger clique.
+
+    Reference: https://arxiv.org/pdf/1006.5440.pdf
+    """
+    if vertices is None:
+        vertices = set(graph.vertices())
+
+    stack = [(vertices, set(), set())]
+    while stack:
+        candidates, clique, excluded = stack.pop()
+
+        if not candidates:
+            if not excluded:
+                yield clique
+            continue
+
+        pivot = max(candidates | excluded, key=lambda _v: len(candidates & graph.neighbours(_v)))
+        for v in candidates - graph.neighbours(pivot):
+            v_neighbours = graph.neighbours(v)
+            stack.append((candidates & v_neighbours, clique | {v}, excluded & v_neighbours))

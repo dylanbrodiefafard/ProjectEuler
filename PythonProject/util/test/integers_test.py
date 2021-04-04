@@ -49,10 +49,10 @@ class IntegersTest(TestCase):
         self.assertEqual(15, digital_sum(102345))
 
     def test_pythagorean_triples(self):
-        self.assertSetEqual({(3, 4, 5)}, pythagorean_triples(5))
-        self.assertSetEqual({(3, 4, 5), (6, 8, 10), (5, 12, 13)}, pythagorean_triples(13))
+        self.assertSetEqual({(3, 4, 5)}, set(pythagorean_triples(12)))
+        self.assertSetEqual({(3, 4, 5), (6, 8, 10), (5, 12, 13)}, set(pythagorean_triples(30)))
         self.assertSetEqual({(3, 4, 5), (6, 8, 10), (5, 12, 13), (9, 12, 15), (8, 15, 17), (12, 16, 20), (7, 24, 25),
-                             (15, 20, 25), (10, 24, 26), (20, 21, 29), (18, 24, 30)}, pythagorean_triples(30))
+                             (15, 20, 25), (10, 24, 26), (20, 21, 29), (18, 24, 30)}, set(pythagorean_triples(73)))
 
     def test_prime_factors(self):
         self.assertListEqual([], list(prime_factors(0)))

@@ -1,5 +1,5 @@
 import itertools
-from collections import Counter
+from collections import Counter, deque
 from functools import reduce, total_ordering
 from math import gcd, isqrt, comb
 
@@ -27,18 +27,24 @@ def digital_sum(n):
     return sum(map(int, str(n)))
 
 
-def pythagorean_triples(c_max):
-    triples = set()
-    for a in range(1, c_max + 1):
-        b = a + 1
-        c = b + 1
-        while c <= c_max:
-            while c ** 2 < a ** 2 + b ** 2:
-                c += 1
-            if a ** 2 + b ** 2 == c ** 2 and c <= c_max:
-                triples.add((a, b, c))
-            b += 1
-    return triples
+def pythagorean_triples(max_perimeter):
+    if max_perimeter < 12:
+        return
+    q = deque([(2, 1)])
+    while q:
+        m, n = q.pop()
+        # compute the primitive triplet
+        if (a := m * m - n * n) > (b := 2 * m * n):
+            a, b = b, a
+        c = m * m + n * n
+        yield a, b, c
+        # compute all the multiples of this triplet
+        for multiple in range(2, 1 + max_perimeter // (a + b + c)):
+            yield a * multiple, b * multiple, c * multiple
+        # expand the matrix multiplications and generate the next (m, n) pairs
+        for m, n in ((2 * m - n, m), (2 * m + n, m), (m + 2 * n, n)):
+            if 2 * (m * (n + m)) <= max_perimeter:
+                q.append((m, n))
 
 
 def prime_factors(number):

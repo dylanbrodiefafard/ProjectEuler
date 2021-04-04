@@ -98,7 +98,7 @@ class Solution54(SolutionBase):
 
     def get_answer(self):
         player1_wins = 0
-        for line in self.get_lines_from_data_file_in_archive('p054.zip', 'p054_poker.txt'):
+        for line in self.get_lines_from_data_file('p054_poker.txt'):
             if self.get_winner(line) == 1:
                 player1_wins += 1
         return player1_wins

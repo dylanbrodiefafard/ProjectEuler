@@ -35,7 +35,7 @@ class Solution81(SolutionBase):
         return [list(map(int, line.split(','))) for line in lines]
 
     def get_answer(self):
-        matrix = self.matrix_from_lines(self.get_lines_from_data_file_in_archive('p081.zip', 'p081_matrix.txt'))
+        matrix = self.matrix_from_lines(self.get_lines_from_data_file('p081_matrix.txt'))
         return self.minimal_path_sum(matrix)
 
 

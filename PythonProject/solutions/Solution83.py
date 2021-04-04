@@ -28,7 +28,7 @@ class Solution83(SolutionBase):
         graph.add_edge(str((len(matrix) - 1, len(matrix[-1]) - 1)), 'end', weight=0)
 
     def get_answer(self):
-        matrix = Solution81.matrix_from_lines(self.get_lines_from_data_file_in_archive('p083.zip', 'p083_matrix.txt'))
+        matrix = Solution81.matrix_from_lines(self.get_lines_from_data_file('p083_matrix.txt'))
         g = Solution82.graph_from_matrix(matrix, **self.DIRECTION_KWARGS)
         self.add_start_and_end_edges(g, matrix)
         distance, _ = dijkstra(g, 'start', 'end')

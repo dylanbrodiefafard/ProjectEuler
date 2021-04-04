@@ -11,7 +11,7 @@ class Solution67(SolutionBase):
 
     def get_answer(self):
         triangle = []
-        for line in self.get_lines_from_data_file_in_archive('p067.zip', 'p067_triangle.txt'):
+        for line in self.get_lines_from_data_file('p067_triangle.txt'):
             triangle.append(list(map(int, line.split(' '))))
         return Solution18.maximum_top_to_bottom_total(triangle)
 

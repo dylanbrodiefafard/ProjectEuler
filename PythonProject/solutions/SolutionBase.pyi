@@ -1,4 +1,4 @@
-from typing import Optional, Pattern, AnyStr, List, Type
+from typing import Optional, Pattern, AnyStr, List, Type, Callable
 from unittest import TestCase
 
 
@@ -6,6 +6,7 @@ class SolutionBase(object):
     NUMBER: int
     VERIFIED_ANSWER: Optional[int]
     SOLUTION_CLASS_NAME_RE: Pattern[AnyStr]
+    SOLUTION_CLASS_SORT_KEY: Callable[[Type[SolutionBase]], Any]
 
     @property
     def url(self) -> str: ...
@@ -15,6 +16,4 @@ class SolutionBase(object):
     def get_solution_classes() -> List[Type[SolutionBase]]: ...
     @staticmethod
     def get_lines_from_data_file(filename: str) -> List[str]: ...
-    @staticmethod
-    def get_lines_from_data_file_in_archive(archive: str, filename: str) -> List[str]: ...
     def print_answer(self, run_tests: bool = True) -> None: ...

@@ -15,7 +15,7 @@ class Solution99(SolutionBase):
     def get_answer(self):
         Answer = namedtuple('Answer', ['line_no', 'value'])
         answer = Answer(-1, NEGATIVE_INFINITY)
-        for line_i, line in enumerate(self.get_lines_from_data_file_in_archive('p099.zip', 'p099_base_exp.txt')):
+        for line_i, line in enumerate(self.get_lines_from_data_file('p099_base_exp.txt')):
             base, exponent = tuple(map(int, line.split(',')))
             value = log(base) * exponent
             if value > answer.value:

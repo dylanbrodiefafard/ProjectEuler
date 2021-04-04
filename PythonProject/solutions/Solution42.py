@@ -30,7 +30,7 @@ class Solution42(SolutionBase):
 
     def get_answer(self):
         num_triangular_words = 0
-        lines = self.get_lines_from_data_file_in_archive('p042.zip', 'p042_words.txt')
+        lines = self.get_lines_from_data_file('p042_words.txt')
         for word in lines[0].split(','):
             word = word.replace('"', '')
             if self.is_triangular(self.word_value(word)):

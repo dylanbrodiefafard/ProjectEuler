@@ -17,7 +17,7 @@ class Solution22(SolutionBase):
 
     def get_answer(self):
         total_scores = 0
-        lines = self.get_lines_from_data_file_in_archive('p022.zip', 'p022_names.txt')
+        lines = self.get_lines_from_data_file('p022_names.txt')
         words = sorted(word.replace('"', '') for word in lines[0].split(','))
         for i, word in enumerate(words):
             total_scores += self.word_score(word, i + 1)

@@ -64,6 +64,18 @@ def prime_factors(number):
         yield int(number), 1
 
 
+def num_partitions(n):
+    partitions = [1] + [0] * n
+    for i in range(1, n + 1):
+        sign = 1
+        for j in range(1, i + 1):
+            for k in (i - (j * (3 * j - 1) // 2), i - (-j * (-3 * j - 1) // 2)):
+                if k >= 0:
+                    partitions[i] += sign * partitions[k]
+            sign *= -1
+    return partitions[n]
+
+
 def multiplicative_partitions(n):
     """Yields all (unordered) multiplicative partitions of the integer n.
     A multiplicative partition or unordered factorization of an integer n is a way of writing n as a product of

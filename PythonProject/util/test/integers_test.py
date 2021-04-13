@@ -63,6 +63,14 @@ class IntegersTest(TestCase):
         self.assertListEqual([(3, 1), (7, 2)], list(prime_factors(147)))
         self.assertListEqual([(2, 1), (3, 1), (5, 1), (11, 1)], list(prime_factors(330)))
 
+    def test_num_partitions(self):
+        self.assertEqual(1, num_partitions(1))
+        self.assertEqual(2, num_partitions(2))
+        self.assertEqual(3, num_partitions(3))
+        self.assertEqual(5, num_partitions(4))
+        self.assertEqual(7, num_partitions(5))
+        self.assertEqual(173525, num_partitions(49))
+
     def test_multiplicative_partitions(self):
         partitions = sorted(multiplicative_partitions(24))
         self.assertTupleEqual((3, 2, 2, 2), partitions[0])

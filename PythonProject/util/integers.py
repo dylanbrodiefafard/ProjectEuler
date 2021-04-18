@@ -183,15 +183,31 @@ def multiplicative_order(a, m):
     return reduce(_lcm, (_multiplicative_order(a, f, e) for f, e in prime_factors(m)))
 
 
-def simplified_continued_fraction(denominators, base, n):
-    if n == 0:
-        return base, 1
-    numerator = 1
-    denominators = list(itertools.islice(denominators, n))
-    denominator = denominators[-1]
-    for d in denominators[-2::-1]:
-        numerator, denominator = denominator, d * denominator + numerator
-    return numerator + base * denominator, denominator
+def continued_fraction_convergents(terms):
+    # Recurrence relationship from:
+    # https://en.wikipedia.org/wiki/Generalized_continued_fraction#Fundamental_recurrence_formulas
+    x_n_minus_1, y_n_minus_1 = 1, 0
+    x_n, y_n = next(terms), 1
+    yield x_n, y_n
+    for a_n_plus_1 in terms:
+        x_n_plus_1 = a_n_plus_1 * x_n + x_n_minus_1
+        y_n_plus_1 = a_n_plus_1 * y_n + y_n_minus_1
+        x_n_minus_1, y_n_minus_1 = x_n, y_n
+        yield (x_n := x_n_plus_1), (y_n := y_n_plus_1)
+
+
+def sqrt_continued_fraction(n):
+    yield (m := int(n ** 0.5))
+    terms = []
+    p, q, d = m, 1, 0
+    while d != 2 * m:
+        q_p = (n - p * p) / q
+        yield (d := int((p + m) / q_p))
+        p, q = d * q_p - p, q_p
+        terms.append(d)
+    repeating_terms = itertools.cycle(terms)
+    del terms
+    yield from repeating_terms
 
 
 def is_square(n):

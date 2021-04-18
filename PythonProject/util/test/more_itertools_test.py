@@ -32,3 +32,10 @@ class MoreItertoolsTest(TestCase):
         self.assertListEqual([0, 1, 2, 3, 4, 5, (6,)], list(flatten(numbers, 3)))
         self.assertListEqual([0, 1, 2, 3, 4, 5, 6], list(flatten(numbers, 4)))
         self.assertListEqual([0, 1, 2, 3, 4, 5, 6], list(flatten(numbers, 5)))
+
+    def test_nth(self):
+        self.assertEqual(1, nth([1], 0))
+        self.assertIsNone(nth([1], 1))
+        self.assertEqual(0, nth([1], 1, default=0))
+        self.assertEqual(2, nth([1, 2], 1, default=0))
+        self.assertEqual(99, nth(range(100), 99))

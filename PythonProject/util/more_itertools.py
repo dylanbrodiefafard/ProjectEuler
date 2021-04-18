@@ -1,6 +1,6 @@
 from collections import Iterable
 from functools import partial
-from itertools import product
+from itertools import product, islice
 
 
 def exactly_n(iterable, n):
@@ -47,3 +47,8 @@ def flatten(iterable, max_depth=None):
                 yield element
 
     yield from _flatten(iterable, 0)
+
+
+def nth(iterable, n, default=None):
+    """Returns the nth item or a default value"""
+    return next(islice(iterable, n, None), default)

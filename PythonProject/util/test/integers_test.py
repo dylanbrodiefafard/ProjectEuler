@@ -1,4 +1,5 @@
-from itertools import cycle
+from decimal import Decimal
+from itertools import cycle, islice, chain
 from unittest import TestCase
 
 from util.integers import *
@@ -126,19 +127,6 @@ class IntegersTest(TestCase):
         self.assertEqual(3, multiplicative_order(1024, 9))
         self.assertEqual(1, multiplicative_order(666, 19))
 
-    def test_simplified_continued_fraction(self):
-        # Test with continued fraction for 0.84375: [0;1,5,2,2]
-        self.assertTupleEqual((0, 1), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 0))
-        self.assertTupleEqual((1, 1), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 1))
-        self.assertTupleEqual((5, 6), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 2))
-        self.assertTupleEqual((11, 13), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 3))
-        self.assertTupleEqual((27, 32), simplified_continued_fraction(cycle([1, 5, 2, 2]), 0, 4))
-        # Test with pi
-        self.assertTupleEqual((3, 1), simplified_continued_fraction(cycle([7, 15, 1]), 3, 0))
-        self.assertTupleEqual((22, 7), simplified_continued_fraction(cycle([7, 15, 1]), 3, 1))
-        self.assertTupleEqual((333, 106), simplified_continued_fraction(cycle([7, 15, 1]), 3, 2))
-        self.assertTupleEqual((355, 113), simplified_continued_fraction(cycle([7, 15, 1]), 3, 3))
-
     def test_aliquot_sum(self):
         self.assertEqual(9, aliquot_sum(15))
         self.assertEqual(15, aliquot_sum(16))
@@ -195,3 +183,47 @@ class IntegersTest(TestCase):
         self.assertEqual(1, num_proper_permutations_of_digits([1, 1]))
         self.assertEqual(1050, num_proper_permutations_of_digits([0, 0, 0, 1, 1, 3, 7, 7]))
         self.assertEqual(1050, num_proper_permutations_of_digits(['0', '0', '0', '1', '1', '3', '7', '7'], zero_value='0'))
+
+    def test_sqrt_continued_fraction(self):
+        def get_terms(n):
+            return tuple(islice(sqrt_continued_fraction(n), 12))
+        self.assertTupleEqual((1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2), get_terms(2))
+        self.assertTupleEqual((1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1), get_terms(3))
+        self.assertTupleEqual((2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4), get_terms(5))
+        self.assertTupleEqual((2, 1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1), get_terms(7))
+        self.assertTupleEqual((3, 1, 1, 1, 1, 6, 1, 1, 1, 1, 6, 1), get_terms(13))
+        self.assertTupleEqual((4, 2, 1, 3, 1, 2, 8, 2, 1, 3, 1, 2), get_terms(19))
+        self.assertTupleEqual((5, 1, 1, 3, 5, 3, 1, 1, 10, 1, 1, 3), get_terms(31))
+        self.assertTupleEqual((6, 1, 1, 3, 1, 5, 1, 3, 1, 1, 12, 1), get_terms(43))
+        self.assertTupleEqual((7, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14), get_terms(50))
+        self.assertTupleEqual((7, 1, 4, 3, 1, 2, 2, 1, 3, 4, 1, 14), get_terms(61))
+        self.assertTupleEqual((8, 5, 2, 1, 1, 7, 1, 1, 2, 5, 16, 5), get_terms(67))
+        self.assertTupleEqual((8, 1, 2, 1, 1, 5, 4, 5, 1, 1, 2, 1), get_terms(76))
+        self.assertTupleEqual((9, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18), get_terms(82))
+        self.assertTupleEqual((9, 1, 2, 3, 1, 1, 5, 1, 8, 1, 5, 1), get_terms(94))
+        self.assertTupleEqual((9, 1, 18, 1, 18, 1, 18, 1, 18, 1, 18, 1), get_terms(99))
+
+    def test_continued_fraction_convergents(self):
+        def get_convergents(first_term, repeating_terms, n):
+            return tuple(islice(continued_fraction_convergents(chain([first_term], cycle(repeating_terms))), n))
+
+        self.assertTupleEqual(
+            ((1, 1), (3, 2), (7, 5), (17, 12), (41, 29), (99, 70), (239, 169), (577, 408)),
+            get_convergents(1, [2], 8)  # sqrt 2
+        )
+        self.assertTupleEqual(
+            ((1, 1), (2, 1), (5, 3), (7, 4), (19, 11), (26, 15), (71, 41), (97, 56)),
+            get_convergents(1, [1, 2], 8)  # sqrt 3
+        )
+        self.assertTupleEqual(
+            ((2, 1), (9, 4), (38, 17), (161, 72)),
+            get_convergents(2, [4], 4)  # sqrt 5
+        )
+        self.assertTupleEqual(
+            ((0, 1), (1, 1), (5, 6), (11, 13), (27, 32)),
+            get_convergents(0, [1, 5, 2, 2], 5)  # Test with continued fraction for 0.84375: [0;1,5,2,2]
+        )
+        self.assertTupleEqual(
+            ((3, 1), (22, 7), (333, 106), (355, 113)),
+            get_convergents(3, [7, 15, 1], 4)  # Test with pi
+        )

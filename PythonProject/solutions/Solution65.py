@@ -1,5 +1,6 @@
 from solutions.SolutionBase import SolutionBase
-from util.integers import simplified_continued_fraction
+from util.integers import continued_fraction_convergents
+from util.more_itertools import nth
 
 
 class Solution65(SolutionBase):
@@ -19,7 +20,8 @@ class Solution65(SolutionBase):
         test_case.assertTupleEqual((1457, 536), self.nth_continued_fraction_of_e(10))
 
     @staticmethod
-    def terms_of_simple_continued_fraction_of_e():
+    def continued_fraction_of_e():
+        yield 2
         yield 1
         n = 2
         while True:
@@ -29,8 +31,8 @@ class Solution65(SolutionBase):
             n += 2
 
     @staticmethod
-    def nth_continued_fraction_of_e(n: int):
-        return simplified_continued_fraction(Solution65.terms_of_simple_continued_fraction_of_e(), 2, n - 1)
+    def nth_continued_fraction_of_e(n):
+        return nth(continued_fraction_convergents(Solution65.continued_fraction_of_e()), n - 1)
 
     def get_answer(self):
         return sum(map(int, str(self.nth_continued_fraction_of_e(100)[0])))

@@ -1,4 +1,3 @@
-from decimal import Decimal
 from itertools import cycle, islice, chain
 from unittest import TestCase
 
@@ -183,6 +182,23 @@ class IntegersTest(TestCase):
         self.assertEqual(1, num_proper_permutations_of_digits([1, 1]))
         self.assertEqual(1050, num_proper_permutations_of_digits([0, 0, 0, 1, 1, 3, 7, 7]))
         self.assertEqual(1050, num_proper_permutations_of_digits(['0', '0', '0', '1', '1', '3', '7', '7'], zero_value='0'))
+
+    def test_sqrt_finite_continued_fraction(self):
+        self.assertTupleEqual((1, 2), sqrt_continued_fraction_finite(2))
+        self.assertTupleEqual((1, 1, 2), sqrt_continued_fraction_finite(3))
+        self.assertTupleEqual((2, 4), sqrt_continued_fraction_finite(5))
+        self.assertTupleEqual((2, 1, 1, 1, 4), sqrt_continued_fraction_finite(7))
+        self.assertTupleEqual((3, 1, 1, 1, 1, 6), sqrt_continued_fraction_finite(13))
+        self.assertTupleEqual((4, 2, 1, 3, 1, 2, 8), sqrt_continued_fraction_finite(19))
+        self.assertTupleEqual((5, 1, 1, 3, 5, 3, 1, 1, 10), sqrt_continued_fraction_finite(31))
+        self.assertTupleEqual((6, 1, 1, 3, 1, 5, 1, 3, 1, 1, 12), sqrt_continued_fraction_finite(43))
+        self.assertTupleEqual((7, 14), sqrt_continued_fraction_finite(50))
+        self.assertTupleEqual((7, 1, 4, 3, 1, 2, 2, 1, 3, 4, 1, 14), sqrt_continued_fraction_finite(61))
+        self.assertTupleEqual((8, 5, 2, 1, 1, 7, 1, 1, 2, 5, 16), sqrt_continued_fraction_finite(67))
+        self.assertTupleEqual((8, 1, 2, 1, 1, 5, 4, 5, 1, 1, 2, 1, 16), sqrt_continued_fraction_finite(76))
+        self.assertTupleEqual((9, 18), sqrt_continued_fraction_finite(82))
+        self.assertTupleEqual((9, 1, 2, 3, 1, 1, 5, 1, 8, 1, 5, 1, 1, 3, 2, 1, 18), sqrt_continued_fraction_finite(94))
+        self.assertTupleEqual((9, 1, 18), sqrt_continued_fraction_finite(99))
 
     def test_sqrt_continued_fraction(self):
         def get_terms(n):

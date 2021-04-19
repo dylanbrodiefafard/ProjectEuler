@@ -196,18 +196,23 @@ def continued_fraction_convergents(terms):
         yield (x_n := x_n_plus_1), (y_n := y_n_plus_1)
 
 
+def sqrt_continued_fraction_finite(n):
+    # Source: https://en.wikipedia.org/wiki/Periodic_continued_fraction#Canonical_form_and_repetend
+    terms = (a0 := int(n ** 0.5), )
+    m, d, a, s = 0, 1, a0, 2 * a0
+    while a != s:
+        m = d * a - m
+        d = (n - m * m) / d
+        terms += (a := int((a0 + m) / d), )
+    return terms
+
+
 def sqrt_continued_fraction(n):
-    yield (m := int(n ** 0.5))
-    terms = []
-    p, q, d = m, 1, 0
-    while d != 2 * m:
-        q_p = (n - p * p) / q
-        yield (d := int((p + m) / q_p))
-        p, q = d * q_p - p, q_p
-        terms.append(d)
-    repeating_terms = itertools.cycle(terms)
+    terms = sqrt_continued_fraction_finite(n)
+    yield terms[0]
+    repetend = itertools.cycle(terms[1:])
     del terms
-    yield from repeating_terms
+    yield from repetend
 
 
 def is_square(n):
